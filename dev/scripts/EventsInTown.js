@@ -11,6 +11,7 @@ class EventsInTown extends React.Component{
             }
         })
         .then((res) => {
+            console.log('yes');
             console.log(res)
         })
     }
