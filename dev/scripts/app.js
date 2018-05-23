@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+<<<<<<< HEAD
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
+=======
+import EventsInTown from './EventsInTown';
+>>>>>>> c26e15ac649cece1db156aa029cb66fc5f7d3f5c
 
 class App extends React.Component {
   
@@ -29,10 +33,14 @@ class App extends React.Component {
     render() {
       return (
         <div>
+<<<<<<< HEAD
           <form onSubmit={()=>this.onSubmit()}>
             <input  type="text"/>
             <button onClick = {() => this.handleSubmit()}></button>
           </form>
+=======
+          <EventsInTown />
+>>>>>>> c26e15ac649cece1db156aa029cb66fc5f7d3f5c
         </div>
       )
     }

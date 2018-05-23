@@ -1,0 +1,53 @@
+react is one-directional
+
+passing down things
+
+<lighthouse color ="blue"/>
+    <lighthouse>
+<lighthouse>
+
+<div> (lighthouse)
+    <p>{this.props.color}<p>
+<div>
+
+everythings an object
+
+Child: what is the correct version of me
+
+
+1. Do I have state?
+the component 
+if yes/ its complext component
+if no/ its simple component
+
+2. Does it have super on it?
+
+
+
+1 JS file returns 1 component
+
+
+
+
+look up vue.js
+
+
+
+1. all state is, is an object
+2. state is scoped to the component
+3. when state is changed, renders() happen
+
+
+React-routing
+
+1. Folders / 2.Funnels
+
+Funnels 
+top(/index.html)
+middle(/cups)
+bottom(/cups/teacups)
+
+debugger shows what's been deleted and what's been populated
+
+console.trace();
+it will print you a list of how it got there.
