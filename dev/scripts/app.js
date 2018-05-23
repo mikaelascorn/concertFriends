@@ -4,13 +4,11 @@ import axios from 'axios';
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 
 class App extends React.Component {
-
-  getUrl() {
-    
-  }
   
-  handleSubmit(event) {
-    // call get URL
+  handleSubmit() {
+
+  }
+  onSubmit(event) {
     event.preventDefault();
   }
 
@@ -26,16 +24,16 @@ class App extends React.Component {
     //2 set up then for a promsie
     .then((res) => {
       console.log(res);
-      
     })
   }
     render() {
       return (
         <div>
-          hi
+          <form onSubmit={()=>this.onSubmit()}>
+            <input  type="text"/>
+            <button onClick = {() => this.handleSubmit()}></button>
+          </form>
         </div>
-        // <input  type="text"/>
-        // <button onClick = {() => this.getUrl()}></button>
       )
     }
 }
