@@ -51,3 +51,4 @@ debugger shows what's been deleted and what's been populated
 
 console.trace();
 it will print you a list of how it got there.
+

@@ -9,7 +9,8 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      artistName: ''
+      artistName: '',
+      
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,6 +30,13 @@ class App extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log('handleSubmit is running!');
+
+
+
+
+    // this.setState({
+    //   artistName: ''
+    // })
   }
 
     render() {

@@ -2,6 +2,12 @@ import React from 'react';
 import axios from 'axios';
 
 class EventsInTown extends React.Component{
+    handleSubmitForm() {
+
+    }
+    handleSubmit(event) {
+        event.preventDefault();
+    }
     componentDidMount() {
         const theArtist = "Drake"
         axios({
@@ -11,14 +17,16 @@ class EventsInTown extends React.Component{
             }
         })
         .then((res) => {
-            console.log('yes');
             console.log(res)
         })
     }
     render() {
         return (
             <div>
-                <h1>Hello</h1>
+                <form onSubmit={() => this.handleSubmitForm()}>
+                    <input type="text"/>
+                    <button onSubmit={() => this.handleSubmit()}></button>
+                </form>
             </div>
         )
     }
