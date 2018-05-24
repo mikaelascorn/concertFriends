@@ -1,46 +1,48 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-<<<<<<< HEAD
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
-=======
 import EventsInTown from './EventsInTown';
->>>>>>> c26e15ac649cece1db156aa029cb66fc5f7d3f5c
 
 class App extends React.Component {
   
-  handleSubmit() {
-
+  constructor() {
+    super();
+    this.state = {
+      artistName: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  onSubmit(event) {
-    event.preventDefault();
-  }
 
-  componentDidMount() {
-    axios.get({
-      url: `https://rest.bandsintown.com/artists/${artistname}`,
-      params: {
-        // artistname: Drake;
-        app_id: `ceec010e4571387dbe8a3dabb1ee3e13`,
-      }
-    })
+
+  handleChange(e) {
+    console.log(e);
     
-    //2 set up then for a promsie
-    .then((res) => {
-      console.log(res);
+    this.setState({
+      // value: event.target.value
+      [e.target.name]: e.target.value
     })
+
+    // store the value as theArtist
   }
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log('handleSubmit is running!');
+  }
+
     render() {
       return (
         <div>
-<<<<<<< HEAD
-          <form onSubmit={()=>this.onSubmit()}>
-            <input  type="text"/>
-            <button onClick = {() => this.handleSubmit()}></button>
-          </form>
-=======
+          <form onSubmit={this.handleSubmit}>
+            <input required type="text" name="artistName" value={this.state.artistName} onChange={this.handleChange}  />
+            {/* <select name="" id="">
+              <option value=""></option>
+              <option value=""></option>
+            </select> */}
+            <input type="submit" value="submit" />
           <EventsInTown />
->>>>>>> c26e15ac649cece1db156aa029cb66fc5f7d3f5c
+          </form>
         </div>
       )
     }
