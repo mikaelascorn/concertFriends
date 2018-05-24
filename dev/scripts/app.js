@@ -52,25 +52,31 @@ class App extends React.Component {
       allShowsClone.push(res.data);
 
       this.topShows(allShowsClone);
-      // console.log(allShowsClone);
 
-      // const allShowsClone = allShows.push(res.data);
-      // this.setState({
-      //   allShows: allShowsClone
-      // })
     })
   }
 
   topShows(allShowsClone) {
     const finalShows = allShowsClone[0].slice(0, 5);
     console.log(finalShows);
-    
-
     this.setState({
       allShows: finalShows
-    })
-    
+    }) 
   }
+
+  // Keep topShows as is, but dont set state in it 
+    // convert the string to an array so we can use POP
+    // Pass the info to a new method to break up date and time, first 10 characters and then last 8? 
+    // use two new methods, one to play with each date and time, look like this:
+  // let finalDate = {
+        //   year:
+        //   Day:
+        //   month:
+        //   time:
+          // }
+
+        // allShows.push(finalDate)
+        // Then we can use that to set state and display the date we want
 
   render() {
     return (
@@ -108,7 +114,7 @@ ReactDOM.render(<App />, document.getElementById('app'));
 
 // Friday Beta
 // 1 - To do list updates - who they have seen 
-// 2 - See upcoming concerts on the screen
+// 2 - See upcoming concerts of the artist they choose on the screen
 // 3 - Search the API
 
 // MVP - weekend
