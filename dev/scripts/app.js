@@ -47,17 +47,29 @@ class App extends React.Component {
     .then((res) => {
       console.log('yes');
       console.log(res.data);
-      
+
       const allShowsClone = Array.from(this.state.allShows);
       allShowsClone.push(res.data);
 
-      console.log(allShowsClone);
+      this.topShows(allShowsClone);
+      // console.log(allShowsClone);
 
       // const allShowsClone = allShows.push(res.data);
       // this.setState({
       //   allShows: allShowsClone
       // })
     })
+  }
+
+  topShows(allShowsClone) {
+    const finalShows = allShowsClone[0].slice(0, 5);
+    console.log(finalShows);
+    
+
+    this.setState({
+      allShows: finalShows
+    })
+    
   }
 
   render() {
@@ -80,7 +92,7 @@ class App extends React.Component {
                 // image=
                 venue={showItem.venue.name} //Check 2-level-deep labels -ok?
                 city={showItem.venue.city}
-                date={showItem.dateTime}
+                date={showItem.datetime}
                 description={showItem.description}
                 ticketsLink={showItem.url}
                 />

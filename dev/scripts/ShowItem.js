@@ -4,10 +4,10 @@ const ShowItem = (props) => {
   return(
     <li>
       <p>{/* {props.image} */}</p>
-      <p>{props.artistName}</p>
-      <p>{props.dateTime}</p>
-      <p>{props.venue.name}</p>
-      <p>{props.venue.city}</p>
+      <p>{props.artist}</p>
+      <p>{props.date}</p>
+      <p>{props.venue}</p>
+      <p>{props.city}</p>
       <p>{props.description}</p>
       <p>{props.url}</p>
     </li>
