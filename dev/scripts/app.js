@@ -37,6 +37,7 @@ class App extends React.Component {
     this.handleSubmitJournal = this.handleSubmitJournal.bind(this);
     this.logout = this.logout.bind(this);
     this.loginWithGoogle = this.loginWithGoogle.bind(this);
+    // this.topShows = this.topShows.bind(this);
   }
 
   loginWithGoogle() {
@@ -106,59 +107,72 @@ class App extends React.Component {
     .then((res) => {
       console.log('yes');
       console.log(res.data);
-
+      
       const allShowsClone = Array.from(this.state.allShows);
       allShowsClone.push(res.data);
 
       this.topShows(allShowsClone);
-
     })
   }
 
   topShows(allShowsClone) {
     const finalShows = allShowsClone[0].slice(0, 5);
     console.log(finalShows);
+    
+    this.dateToString(finalShows)
+
     this.setState({
       allShows: finalShows
     }) 
   }
+  // dont set state in top shows 
+  dateToString(finalShows) {
+    const sliceTime = finalShows[0].datetime.slice(11);
+    console.log(sliceTime);
+
+    const sliceDate = finalShows[0].datetime.slice(0, 10);
+    console.log(sliceDate);
+     
+    const sliceDay = sliceDate.slice(8, 10);
+    console.log(sliceDay);
+
+    const sliceMonth = sliceDate.slice(5, 7);
+    console.log(sliceMonth);
+
+    const sliceYear = sliceDate.slice(0,4);
+    console.log(sliceYear);
+
+    let finalDate = {
+      month: sliceMonth,
+      day: sliceDay,
+      year: sliceYear,
+      time: sliceTime 
+    }
+    return 
+    // finalShows.push(finalDate)
+  }
+   
+
+      // allShows.push(finalDate)
+      // Then we can use that to set state and display the date we want
 
   handleSubmitJournal(e) {
     e.preventDefault();
-
     const userSeen = {
       artist: this.state.artistSeen,
       date: this.state.seenDate,
       location: this.state.seenLocation,
       memory: this.state.seenMemory
     }
-
     const dbRef = firebase.database().ref('IHeartConcert');
-
     dbRef.push(userSeen);
-
     this.setState({
       artistSeen: '',
       seenDate: '',
       seenLocation: '',
       seenMemory: ''
     })
-
   }
-
-  // Keep topShows as is, but dont set state in it 
-    // convert the string to an array so we can use POP
-    // Pass the info to a new method to break up date and time, first 10 characters and then last 8? 
-    // use two new methods, one to play with each date and time, look like this:
-  // let finalDate = {
-        //   year:
-        //   Day:
-        //   month:
-        //   time:
-          // }
-
-        // allShows.push(finalDate)
-        // Then we can use that to set state and display the date we want
 
   render() {
     return (
