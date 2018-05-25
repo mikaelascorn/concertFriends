@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
-import firebase from 'firebase';
+import firebase, { auth, provider } from 'firebase';
 import ShowItem from './ShowItem';
 import JournalItem from './JournalItem';
 
@@ -15,6 +15,7 @@ var config = {
   storageBucket: "iheartconcerts-80ab6.appspot.com",
   messagingSenderId: "790151033211"
 };
+
 firebase.initializeApp(config);
 
 class App extends React.Component {
@@ -30,7 +31,8 @@ class App extends React.Component {
       seenDate: '',
       seenLocation: '',
       seenMemory: '',
-      artistsSeen: []
+      artistsSeen: [],
+      user: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmitUpcoming = this.handleSubmitUpcoming.bind(this);
@@ -45,12 +47,16 @@ class App extends React.Component {
     const provider = new firebase.auth.GoogleAuthProvider();
 
     firebase.auth().signInWithPopup(provider)
-    .then((user) => {
-      const givenName = user.additionalUserInfo.profile.given_name;
+    .then((result) => {
+      const user = result.user;
+      console.log(user);
+      
+      const givenName = result.additionalUserInfo.profile.given_name;
       console.log(givenName);
       this.setState({
-        displayName: givenName
-      })
+        displayName: givenName,
+        user
+      });
     })
     // this will catch an error, its a promise method
     .catch((err) => {
@@ -63,11 +69,15 @@ class App extends React.Component {
     //turn the listener off and on
     this.dbRef.off('value');
     console.log('signed out!');
+    this.setState({
+      allShows: [],
+      user: null
+    });
   }
 
   componentDidMount() {
     // setup the event listener, make reference to the key in firebase
-    this.dbRef = firebase.database().ref('IHeartConcerts');
+    this.dbRef = firebase.database().ref(`IHeartConcerts/${this.state.user}`);
     // this method gets a user passed, if theres a user
     firebase.auth().onAuthStateChanged((user) => {
       console.log(user);
@@ -78,7 +88,8 @@ class App extends React.Component {
         });
         this.setState({
           loggedIn: true,
-          displayName: user.displayName
+          displayName: user.displayName,
+          user 
         });
       } else {
         this.setState({
@@ -151,8 +162,7 @@ class App extends React.Component {
     return 
     // finalShows.push(finalDate)
   }
-   
-
+  
       // allShows.push(finalDate)
       // Then we can use that to set state and display the date we want
 
@@ -164,7 +174,7 @@ class App extends React.Component {
       location: this.state.seenLocation,
       memory: this.state.seenMemory
     }
-    const dbRef = firebase.database().ref('IHeartConcert');
+    // const dbRef = firebase.database().ref(`IHeartConcert/${this.state.user}`);
     dbRef.push(userSeen);
     this.setState({
       artistSeen: '',
@@ -185,7 +195,7 @@ class App extends React.Component {
           <h2>Hi, {this.state.displayName}</h2>
         </div>
         <form onSubmit={this.handleSubmitUpcoming}>
-          <input required type="text" name="artistName" value={this.state.artistName} onChange={this.handleChange} placeholder="Drake" />
+          <input required type="text" name="artistName" value={this.state.artistName} onChange={this.handleChange} placeholder="Artist" />
           {/* <select name="" id="">
             <option value=""></option>
             <option value=""></option>
