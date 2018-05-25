@@ -4,7 +4,8 @@ import axios from 'axios';
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 import firebase from 'firebase';
 import ShowItem from './ShowItem';
-// import EventsInTown from './EventsInTown';
+import JournalItem from './JournalItem';
+
 
 var config = {
   apiKey: "AIzaSyBEqlA21ilIP2aDVHm6KhvprRhz6xkyG4k",
@@ -23,11 +24,19 @@ class App extends React.Component {
     this.state = {
       artistName: '',
       allShows: [],
-      loggedIn: false
+      loggedIn: false,
+      displayName: '',
+      artistSeen: '',
+      seenDate: '',
+      seenLocation: '',
+      seenMemory: '',
+      artistsSeen: []
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmitUpcoming = this.handleSubmitUpcoming.bind(this);
+    this.handleSubmitJournal = this.handleSubmitJournal.bind(this);
     this.logout = this.logout.bind(this);
+    this.loginWithGoogle = this.loginWithGoogle.bind(this);
   }
 
   loginWithGoogle() {
@@ -36,12 +45,16 @@ class App extends React.Component {
 
     firebase.auth().signInWithPopup(provider)
     .then((user) => {
-      console.log(user);
+      const givenName = user.additionalUserInfo.profile.given_name;
+      console.log(givenName);
+      this.setState({
+        displayName: givenName
+      })
     })
     // this will catch an error, its a promise method
     .catch((err) => {
       console.log(err);
-    })
+    });
   }
 
   logout() {
@@ -52,17 +65,19 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // setup the event listener, make reference to the 'todos' key in firebase
+    // setup the event listener, make reference to the key in firebase
     this.dbRef = firebase.database().ref('IHeartConcerts');
     // this method gets a user passed, if theres a user
     firebase.auth().onAuthStateChanged((user) => {
+      console.log(user);
       if (user !== null) {
         // theres no data for the user to get, we need to allow them to get the access to the data when they login
         this.dbRef.on('value', (snapshot) => {
-          console.log(snapshot.val());
+          // console.log(snapshot.val());
         });
         this.setState({
-          loggedIn: true
+          loggedIn: true,
+          displayName: user.displayName
         });
       } else {
         this.setState({
@@ -78,7 +93,7 @@ class App extends React.Component {
     });
   }
 
-  handleSubmit(e) {
+  handleSubmitUpcoming(e) {
     e.preventDefault();
     let theArtist = ''
     theArtist = this.state.artistName;
@@ -108,6 +123,29 @@ class App extends React.Component {
     }) 
   }
 
+  handleSubmitJournal(e) {
+    e.preventDefault();
+
+    const userSeen = {
+      artist: this.state.artistSeen,
+      date: this.state.seenDate,
+      location: this.state.seenLocation,
+      memory: this.state.seenMemory
+    }
+
+    const dbRef = firebase.database().ref('IHeartConcert');
+
+    dbRef.push(userSeen);
+
+    this.setState({
+      artistSeen: '',
+      seenDate: '',
+      seenLocation: '',
+      seenMemory: ''
+    })
+
+  }
+
   // Keep topShows as is, but dont set state in it 
     // convert the string to an array so we can use POP
     // Pass the info to a new method to break up date and time, first 10 characters and then last 8? 
@@ -129,8 +167,10 @@ class App extends React.Component {
           {this.state.loggedIn === false && <button onClick={this.loginWithGoogle}>Login with Google</button>}
           {this.state.loggedIn === true ? <button onClick={this.logout}>Logout</button> : null}
         </div>
-        
-        <form onSubmit={this.handleSubmit}>
+        <div>
+          <h2>Hi, {this.state.displayName}</h2>
+        </div>
+        <form onSubmit={this.handleSubmitUpcoming}>
           <input required type="text" name="artistName" value={this.state.artistName} onChange={this.handleChange} placeholder="Drake" />
           {/* <select name="" id="">
             <option value=""></option>
@@ -154,6 +194,25 @@ class App extends React.Component {
               })}
               </ul>
         </form>
+        <form onSubmit={this.handleSubmitJournal}>
+          <input type="text" name="artistSeen" value={this.state.artistSeen} onChange={this.handleChange}/>
+          <input type="text" name="seenDate" value={this.state.seenDate} onChange={this.handleChange}/>
+          <input type="text" name="seenLocation" value={this.state.seenLocation} onChange={this.handleChange}/>
+          <textarea name="" id="" cols="30" rows="10" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
+          <input type="submit" value="Add Entry"/>
+          <h2>Artists {this.state.displayName} has seen</h2>
+              <ul>
+                {this.state.artistsSeen.map((journal, i) => {
+                  return <JournalItem
+                  key={i}
+                  artist={journal.artistSeen}
+                  date={journal.seenDate}
+                  location={journal.seenLocation}
+                  memory={journal.seenMemory}
+                  />
+                })}
+              </ul>
+        </form>
       </div>
     )
   }
@@ -164,8 +223,8 @@ ReactDOM.render(<App />, document.getElementById('app'));
 // Friday Beta
 // 1 - To do list updates - who they have seen 
 // 2 - See upcoming concerts of the artist they choose on the screen
-// 3 - Search the API 
-// 4 - Login with Google/ Firebase 
+// 3 - Search the API - CHECKED
+// 4 - Login with Google/ Firebase CHECKED
 
 // MVP - weekend
 // Router! 
