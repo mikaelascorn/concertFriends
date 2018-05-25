@@ -22,10 +22,54 @@ class App extends React.Component {
     super();
     this.state = {
       artistName: '',
-      allShows: []
+      allShows: [],
+      loggedIn: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+
+  loginWithGoogle() {
+    console.log('clicked');
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    firebase.auth().signInWithPopup(provider)
+    .then((user) => {
+      console.log(user);
+    })
+    // this will catch an error, its a promise method
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
+  logout() {
+    firebase.auth().signOut();
+    //turn the listener off and on
+    this.dbRef.off('value');
+    console.log('signed out!');
+  }
+
+  componentDidMount() {
+    // setup the event listener, make reference to the 'todos' key in firebase
+    this.dbRef = firebase.database().ref('IHeartConcerts');
+    // this method gets a user passed, if theres a user
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user !== null) {
+        // theres no data for the user to get, we need to allow them to get the access to the data when they login
+        this.dbRef.on('value', (snapshot) => {
+          console.log(snapshot.val());
+        });
+        this.setState({
+          loggedIn: true
+        });
+      } else {
+        this.setState({
+          loggedIn: false
+        });
+      }
+    })
   }
 
   handleChange(e) {
@@ -81,6 +125,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <div>
+          {this.state.loggedIn === false && <button onClick={this.loginWithGoogle}>Login with Google</button>}
+          {this.state.loggedIn === true ? <button onClick={this.logout}>Logout</button> : null}
+        </div>
+        
         <form onSubmit={this.handleSubmit}>
           <input required type="text" name="artistName" value={this.state.artistName} onChange={this.handleChange} placeholder="Drake" />
           {/* <select name="" id="">
@@ -115,10 +164,10 @@ ReactDOM.render(<App />, document.getElementById('app'));
 // Friday Beta
 // 1 - To do list updates - who they have seen 
 // 2 - See upcoming concerts of the artist they choose on the screen
-// 3 - Search the API
+// 3 - Search the API 
+// 4 - Login with Google/ Firebase 
 
 // MVP - weekend
-// Login with Google/ Firebase 
 // Router! 
 
 // Nice to have 
