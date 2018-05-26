@@ -46,11 +46,9 @@ class App extends React.Component {
   loginWithGoogle() {
     console.log('clicked');
     const provider = new firebase.auth.GoogleAuthProvider();
-
     firebase.auth().signInWithPopup(provider)
       .then((result) => {
         // grab info from user here 
-
         const user = result.user.displayName;
         const userId = result.user.uid;
         // console.log(result.user.displayName);
@@ -78,10 +76,29 @@ class App extends React.Component {
     console.log('signed out!');
     this.setState({
       allShows: [],
-      userId: ''
+      userId: '',
+      displayName: ''
     });
   }
 
+  // check on load if there is a user logged in alread, if so set the states accordingly
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log('user logged in');
+        console.log(user);
+        this.setState({
+          loggedIn: true,
+          displayName: user.displayName,
+          userId: user.uid,
+        })
+      } else {
+        console.log('no users logged in');
+      }
+    });
+  }
+
+  // Checking if we already have the users information from firebase
   componentDidMount() {
     // setup the event listener, make reference to the key in firebase
     this.dbRef = firebase.database().ref(`users/`);
@@ -179,7 +196,7 @@ class App extends React.Component {
       location: this.state.seenLocation,
       memory: this.state.seenMemory
     }
-    // const dbRef = firebase.database().ref(`IHeartConcert/${this.state.user}`);
+    const dbRef = firebase.database().ref(`users/${this.state.userId}`);
     dbRef.push(userSeen);
     this.setState({
       artistSeen: '',
