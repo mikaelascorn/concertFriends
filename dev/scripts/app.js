@@ -200,10 +200,10 @@ class App extends React.Component {
     temporaryArray.push(userSeen);
     // new array, of items and set state to that array to display on page 
     this.setState({
-      artistSeen: '',
-      seenDate: '',
-      seenLocation: '',
-      seenMemory: '',
+      // artistSeen: '',
+      // seenDate: '',
+      // seenLocation: '',
+      // seenMemory: '',
       artistsSeen: temporaryArray
     })
   }
