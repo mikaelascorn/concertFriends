@@ -138,12 +138,10 @@ class App extends React.Component {
       }
     })
       .then((res) => {
-        console.log('yes');
-        console.log(res.data);
-
+        // console.log('yes');
+        // console.log(res.data);
         const allShowsClone = Array.from(this.state.allShows);
         allShowsClone.push(res.data);
-
         this.topShows(allShowsClone);
       })
   }
@@ -183,10 +181,9 @@ class App extends React.Component {
     }
     return
     // finalShows.push(finalDate)
+    // allShows.push(finalDate)
+    // Then we can use that to set state and display the date we want
   }
-
-  // allShows.push(finalDate)
-  // Then we can use that to set state and display the date we want
 
   handleSubmitJournal(e) {
     e.preventDefault();
@@ -198,11 +195,16 @@ class App extends React.Component {
     }
     const dbRef = firebase.database().ref(`users/${this.state.userId}`);
     dbRef.push(userSeen);
+    // THIS WILL MAKE A CLONE OF THE ARRAY ARTISTS SEEN AND THEN PUSH TO THE NEW ARRAY, SO WE CAN RESET STATE EMPTY AND WE CAN HAVE THE ITEMS STAY ON THE PAGE
+    const temporaryArray = this.state.artistsSeen;
+    temporaryArray.push(userSeen);
+    // new array, of items and set state to that array to display on page 
     this.setState({
       artistSeen: '',
       seenDate: '',
       seenLocation: '',
-      seenMemory: ''
+      seenMemory: '',
+      artistsSeen: temporaryArray
     })
   }
 
@@ -244,7 +246,7 @@ class App extends React.Component {
           <input type="text" name="artistSeen" value={this.state.artistSeen} onChange={this.handleChange} />
           <input type="text" name="seenDate" value={this.state.seenDate} onChange={this.handleChange} />
           <input type="text" name="seenLocation" value={this.state.seenLocation} onChange={this.handleChange} />
-          <textarea name="" id="" cols="30" rows="10" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
+          <textarea name="" id="" cols="10" rows="10" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
           <input type="submit" value="Add Entry" />
           <h2>Artists {this.state.displayName} has seen</h2>
           <ul>
@@ -277,7 +279,6 @@ ReactDOM.render(<App />, document.getElementById('app'));
 
 // Nice to have 
 // Shift from a concert to a wish list? So save upcoming concerts you want to see
-// Second API call to have photo artist info diplay on the page
   // search without events
   // image_url  - full size image
   // thumb_url - tiny version image
