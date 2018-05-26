@@ -32,7 +32,8 @@ class App extends React.Component {
       seenLocation: '',
       seenMemory: '',
       artistsSeen: [],
-      user: null
+      // user: null,
+      userId: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmitUpcoming = this.handleSubmitUpcoming.bind(this);
@@ -48,14 +49,15 @@ class App extends React.Component {
 
     firebase.auth().signInWithPopup(provider)
     .then((result) => {
-      const user = result.user;
-      console.log(user);
+      // grab info from user here 
       
-      const givenName = result.additionalUserInfo.profile.given_name;
-      console.log(givenName);
+      const user = result.user.displayName;
+      const userId = result.user.uid;
+      // console.log(result.user.displayName);
+      
       this.setState({
-        displayName: givenName,
-        user
+        displayName: user,
+        userId: userId
       });
     })
     // this will catch an error, its a promise method
@@ -71,16 +73,16 @@ class App extends React.Component {
     console.log('signed out!');
     this.setState({
       allShows: [],
-      user: null
+      userId: ''
     });
   }
 
   componentDidMount() {
     // setup the event listener, make reference to the key in firebase
-    this.dbRef = firebase.database().ref(`IHeartConcerts/${this.state.user}`);
+    this.dbRef = firebase.database().ref(`users/`);
     // this method gets a user passed, if theres a user
     firebase.auth().onAuthStateChanged((user) => {
-      console.log(user);
+      // console.log(user);
       if (user !== null) {
         // theres no data for the user to get, we need to allow them to get the access to the data when they login
         this.dbRef.on('value', (snapshot) => {
@@ -88,9 +90,16 @@ class App extends React.Component {
         });
         this.setState({
           loggedIn: true,
-          displayName: user.displayName,
-          user 
-        });
+          displayName: user.displayName
+        }, () => {
+          // doing this to run this fuction after that set state
+          const userInfo = {
+            user: this.state.displayName,
+            userId: this.state.userId
+          }
+          // sets firebase as general user ids per person
+          firebase.database().ref('users/' + this.state.userId).set(userInfo);
+        })
       } else {
         this.setState({
           loggedIn: false
