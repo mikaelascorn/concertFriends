@@ -19,7 +19,7 @@ var config = {
 firebase.initializeApp(config);
 
 class App extends React.Component {
-  
+
   constructor() {
     super();
     this.state = {
@@ -48,22 +48,27 @@ class App extends React.Component {
     const provider = new firebase.auth.GoogleAuthProvider();
 
     firebase.auth().signInWithPopup(provider)
-    .then((result) => {
-      // grab info from user here 
-      
-      const user = result.user.displayName;
-      const userId = result.user.uid;
-      // console.log(result.user.displayName);
-      
-      this.setState({
-        displayName: user,
-        userId: userId
+      .then((result) => {
+        // grab info from user here 
+
+        const user = result.user.displayName;
+        const userId = result.user.uid;
+        // console.log(result.user.displayName);
+        this.setState({
+          displayName: user,
+          userId: userId
+        }, () => {
+          const userInfo = {
+            displayName: this.state.displayName,
+            userId: this.state.userId,
+          }
+          firebase.database().ref(`users/${this.state.userId}`).set(userInfo);
+        })
+      })
+      // this will catch an error, its a promise method
+      .catch((err) => {
+        console.log(err);
       });
-    })
-    // this will catch an error, its a promise method
-    .catch((err) => {
-      console.log(err);
-    });
   }
 
   logout() {
@@ -90,15 +95,6 @@ class App extends React.Component {
         });
         this.setState({
           loggedIn: true,
-          displayName: user.displayName
-        }, () => {
-          // doing this to run this fuction after that set state
-          const userInfo = {
-            user: this.state.displayName,
-            userId: this.state.userId
-          }
-          // sets firebase as general user ids per person
-          firebase.database().ref('users/' + this.state.userId).set(userInfo);
         })
       } else {
         this.setState({
@@ -124,26 +120,26 @@ class App extends React.Component {
         app_id: `6e7ce2bb9f77b677bc181759630ddcf4`
       }
     })
-    .then((res) => {
-      console.log('yes');
-      console.log(res.data);
-      
-      const allShowsClone = Array.from(this.state.allShows);
-      allShowsClone.push(res.data);
+      .then((res) => {
+        console.log('yes');
+        console.log(res.data);
 
-      this.topShows(allShowsClone);
-    })
+        const allShowsClone = Array.from(this.state.allShows);
+        allShowsClone.push(res.data);
+
+        this.topShows(allShowsClone);
+      })
   }
 
   topShows(allShowsClone) {
     const finalShows = allShowsClone[0].slice(0, 5);
     console.log(finalShows);
-    
+
     this.dateToString(finalShows)
 
     this.setState({
       allShows: finalShows
-    }) 
+    })
   }
   // dont set state in top shows 
   dateToString(finalShows) {
@@ -152,28 +148,28 @@ class App extends React.Component {
 
     const sliceDate = finalShows[0].datetime.slice(0, 10);
     console.log(sliceDate);
-     
+
     const sliceDay = sliceDate.slice(8, 10);
     console.log(sliceDay);
 
     const sliceMonth = sliceDate.slice(5, 7);
     console.log(sliceMonth);
 
-    const sliceYear = sliceDate.slice(0,4);
+    const sliceYear = sliceDate.slice(0, 4);
     console.log(sliceYear);
 
     let finalDate = {
       month: sliceMonth,
       day: sliceDay,
       year: sliceYear,
-      time: sliceTime 
+      time: sliceTime
     }
-    return 
+    return
     // finalShows.push(finalDate)
   }
-  
-      // allShows.push(finalDate)
-      // Then we can use that to set state and display the date we want
+
+  // allShows.push(finalDate)
+  // Then we can use that to set state and display the date we want
 
   handleSubmitJournal(e) {
     e.preventDefault();
@@ -211,10 +207,10 @@ class App extends React.Component {
           </select> */}
           <input type="submit" value="Artist Search" />
           <h2>Upcoming Shows</h2>
-            <ul>
-              {this.state.allShows.map((showItem,i) => {
-                //How many results do we want to show?
-                return <ShowItem
+          <ul>
+            {this.state.allShows.map((showItem, i) => {
+              //How many results do we want to show?
+              return <ShowItem
                 key={i}
                 artist={showItem.artistName}
                 // image=
@@ -223,28 +219,28 @@ class App extends React.Component {
                 date={showItem.datetime}
                 description={showItem.description}
                 ticketsLink={showItem.url}
-                />
-              })}
-              </ul>
+              />
+            })}
+          </ul>
         </form>
         <form onSubmit={this.handleSubmitJournal}>
-          <input type="text" name="artistSeen" value={this.state.artistSeen} onChange={this.handleChange}/>
-          <input type="text" name="seenDate" value={this.state.seenDate} onChange={this.handleChange}/>
-          <input type="text" name="seenLocation" value={this.state.seenLocation} onChange={this.handleChange}/>
+          <input type="text" name="artistSeen" value={this.state.artistSeen} onChange={this.handleChange} />
+          <input type="text" name="seenDate" value={this.state.seenDate} onChange={this.handleChange} />
+          <input type="text" name="seenLocation" value={this.state.seenLocation} onChange={this.handleChange} />
           <textarea name="" id="" cols="30" rows="10" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
-          <input type="submit" value="Add Entry"/>
+          <input type="submit" value="Add Entry" />
           <h2>Artists {this.state.displayName} has seen</h2>
-              <ul>
-                {this.state.artistsSeen.map((journal, i) => {
-                  return <JournalItem
-                  key={i}
-                  artist={journal.artistSeen}
-                  date={journal.seenDate}
-                  location={journal.seenLocation}
-                  memory={journal.seenMemory}
-                  />
-                })}
-              </ul>
+          <ul>
+            {this.state.artistsSeen.map((journal, i) => {
+              return <JournalItem
+                key={i}
+                artist={journal.artistSeen}
+                date={journal.seenDate}
+                location={journal.seenLocation}
+                memory={journal.seenMemory}
+              />
+            })}
+          </ul>
         </form>
       </div>
     )
@@ -268,4 +264,3 @@ ReactDOM.render(<App />, document.getElementById('app'));
   // search without events
   // image_url  - full size image
   // thumb_url - tiny version image
-
