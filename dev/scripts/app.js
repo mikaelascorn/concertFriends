@@ -24,6 +24,8 @@ class App extends React.Component {
     this.state = {
       artistName: '',
       allShows: [],
+      imageArtist: '',
+      postedName: '',
       loggedIn: false,
       displayName: '',
       artistSeen: '',
@@ -149,11 +151,13 @@ class App extends React.Component {
         app_id: `6e7ce2bb9f77b677bc181759630ddcf4`
       }
     }) 
-      .then((res) => {
-        // console.log('yes');
-        console.log(res.data);
-        
-      }) 
+    .then((res) => {
+      console.log(res.data);
+      this.setState({
+        imageArtist: res.data.image_url,
+        postedName: res.data.name,
+      })      
+    }) 
     axios({
       url: `https://rest.bandsintown.com/artists/${theArtist}/events/`,
       params: {
@@ -174,7 +178,6 @@ class App extends React.Component {
     console.log(finalShows);
 
     this.dateToString(finalShows)
-
     this.setState({
       allShows: finalShows
     })
@@ -256,18 +259,21 @@ class App extends React.Component {
           </select> */}
           <input type="submit" value="Artist Search" />
           <h2>Upcoming Concerts</h2>
+          <h3>{this.state.postedName}</h3>
+          <div>
+            <img src={this.state.imageArtist} alt="image of the artist user searched"/>
+          </div>
           <ul>
             {this.state.allShows.map((showItem, i) => {
               //How many results do we want to show?
               return <ShowItem
                 key={i}
-                artist={showItem.artistName}
-                // image=
+                // artist={this.state.postedName}
                 venue={showItem.venue.name} //Check 2-level-deep labels -ok?
                 city={showItem.venue.city}
                 date={showItem.datetime}
                 description={showItem.description}
-                ticketsLink={showItem.offers[0].url}
+                url={showItem.offers[0].url}
               />
             })}
           </ul>
