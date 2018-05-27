@@ -64,12 +64,14 @@ class App extends React.Component {
   logout() {
     firebase.auth().signOut();
     //turn the listener off and on
-    
+    // this.dbRef.off('value');
+    // console.log('signed out!');
     this.setState({
       allShows: [],
       userId: '',
       displayName: '',
-      loggedIn: false
+      loggedIn: false,
+      artistsSeen: []
     });
   }
 
@@ -136,24 +138,29 @@ class App extends React.Component {
     e.preventDefault();
     let theArtist = ''
     theArtist = this.state.artistName;
+    console.log(theArtist);
+    
     axios({
       url: `https://rest.bandsintown.com/artists/${theArtist}/events/`,
       params: {
         app_id: `6e7ce2bb9f77b677bc181759630ddcf4`
       }
     })
-      .then((res) => {
-        // console.log('yes');
-        // console.log(res.data);
-        const allShowsClone = Array.from(this.state.allShows);
-        allShowsClone.push(res.data);
-        this.topShows(allShowsClone);
-      })
+    .then((res) => {
+      // console.log('yes');
+      // console.log(res.data);
+      let allShowsClone = Array.from(this.state.allShows);
+      allShowsClone.push(res.data);
+      this.topShows(allShowsClone);
+    })
+    this.setState({
+      artistName: ''
+    })
   }
 
   topShows(allShowsClone) {
-    const finalShows = allShowsClone[0].slice(0, 5);
-    console.log(finalShows);
+    console.log(allShowsClone);
+    let finalShows = allShowsClone[0].slice(0, 5);
 
     this.dateToString(finalShows)
 
