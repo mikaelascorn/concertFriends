@@ -56,7 +56,7 @@ class App extends React.Component {
           userId: userId
         }, () => {
           const userInfo = {
-            displayName: this.state.displayName,
+            // displayName: this.state.displayName,
             userId: this.state.userId,
           }
           firebase.database().ref(`users/${this.state.userId}`).set(userInfo);
@@ -86,10 +86,9 @@ class App extends React.Component {
       if (user) {
         console.log('user logged in');
         // console.log(user);
-        
         this.setState({
           loggedIn: true,
-          displayName: user.displayName,
+          // displayName: user.displayName,
           userId: user.uid,
         })
       } else {
@@ -100,7 +99,6 @@ class App extends React.Component {
 
   // Checking if we already have the users information from firebase
   componentDidMount() {
-    // setup the event listener, make reference to the key in firebase
     // this.dbRef = firebase.database().ref(`users/`);
     // this method gets a user passed, if theres a user
     firebase.auth().onAuthStateChanged((user) => {
@@ -112,7 +110,6 @@ class App extends React.Component {
           .on('value', (snapshot) => {
             const data = snapshot.val();
             // console.log(data);
-
             const journalArray = [];
 
             for (let item in data) {
@@ -177,7 +174,6 @@ class App extends React.Component {
 
   // dont set state in top shows 
   dateToString(finalShows) {
-    
     for (let index = 0; index < finalShows.length; ++index) {
       const sliceTime = finalShows[index].datetime.slice(11);
       // console.log(sliceTime);
