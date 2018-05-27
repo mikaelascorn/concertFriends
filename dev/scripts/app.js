@@ -39,6 +39,7 @@ class App extends React.Component {
     this.handleSubmitJournal = this.handleSubmitJournal.bind(this);
     this.logout = this.logout.bind(this);
     this.loginWithGoogle = this.loginWithGoogle.bind(this);
+    // this.topShows = this.topShows.bind(this);
   }
 
   loginWithGoogle() {
@@ -112,7 +113,6 @@ class App extends React.Component {
           // console.log(data);
 
           const journalArray = [];
-          console.log(journalArray);
 
           for (let item in data) {
             console.log(item);
