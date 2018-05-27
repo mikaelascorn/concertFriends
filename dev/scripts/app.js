@@ -6,7 +6,6 @@ import firebase, { auth, provider } from 'firebase';
 import ShowItem from './ShowItem';
 import JournalItem from './JournalItem';
 
-
 var config = {
   apiKey: "AIzaSyBEqlA21ilIP2aDVHm6KhvprRhz6xkyG4k",
   authDomain: "iheartconcerts-80ab6.firebaseapp.com",
@@ -18,7 +17,6 @@ var config = {
 
 firebase.initializeApp(config);
 
-
 class App extends React.Component {
 
   constructor() {
@@ -26,6 +24,8 @@ class App extends React.Component {
     this.state = {
       artistName: '',
       allShows: [],
+      imageArtist: '',
+      postedName: '',
       loggedIn: false,
       displayName: '',
       artistSeen: '',
@@ -110,7 +110,6 @@ class App extends React.Component {
             const journalArray = [];
 
             for (let item in data) {
-
               data[item].key = item;
 
               journalArray.push(data[item])
@@ -145,19 +144,33 @@ class App extends React.Component {
     })
     let theArtist = ''
     theArtist = this.state.artistName;
+    console.log(theArtist);
+    axios({
+      url: `https://rest.bandsintown.com/artists/${theArtist}/`,
+      params: {
+        app_id: `6e7ce2bb9f77b677bc181759630ddcf4`
+      }
+    }) 
+    .then((res) => {
+      console.log(res.data);
+      this.setState({
+        imageArtist: res.data.image_url,
+        postedName: res.data.name,
+      })      
+    }) 
     axios({
       url: `https://rest.bandsintown.com/artists/${theArtist}/events/`,
       params: {
         app_id: `6e7ce2bb9f77b677bc181759630ddcf4`
       }
     })
-      .then((res) => {
-        // console.log('yes');
-        // console.log(res.data);
-        let allShowsClone = Array.from(this.state.allShows);
-        allShowsClone.push(res.data);
-        this.topShows(allShowsClone);
-      }) 
+    .then((res) => {
+      // console.log('yes');
+      console.log(res.data);
+      let allShowsClone = Array.from(this.state.allShows);
+      allShowsClone.push(res.data);
+      this.topShows(allShowsClone);
+    }) 
   }
 
   topShows(allShowsClone) {
@@ -165,7 +178,6 @@ class App extends React.Component {
     console.log(finalShows);
 
     this.dateToString(finalShows)
-
     this.setState({
       allShows: finalShows
     })
@@ -227,12 +239,12 @@ class App extends React.Component {
     firebase.database().ref(`users/${this.state.userId}/${journalToRemove}`).remove();
   }
 
-  
-
   render() {
     return (
       <div>
         <div>
+          <h1>I Heart Concerts</h1>
+          <h2>One place to search for upcoming concerts by your favourite artists and keep a journal of memories from past concerts you've attended!</h2>
           {this.state.loggedIn === false && <button onClick={this.loginWithGoogle}>Login with Google</button>}
           {this.state.loggedIn === true ? <button onClick={this.logout}>Logout</button> : null}
         </div>
@@ -246,19 +258,22 @@ class App extends React.Component {
             <option value=""></option>
           </select> */}
           <input type="submit" value="Artist Search" />
-          <h2>Upcoming Shows</h2>
+          <h2>Upcoming Concerts</h2>
+          <h3>{this.state.postedName}</h3>
+          <div>
+            <img src={this.state.imageArtist} alt="image of the artist user searched"/>
+          </div>
           <ul>
             {this.state.allShows.map((showItem, i) => {
               //How many results do we want to show?
               return <ShowItem
                 key={i}
-                artist={showItem.artistName}
-                // image=
+                // artist={this.state.postedName}
                 venue={showItem.venue.name} //Check 2-level-deep labels -ok?
                 city={showItem.venue.city}
                 date={showItem.datetime}
                 description={showItem.description}
-                ticketsLink={showItem.url}
+                url={showItem.offers[0].url}
               />
             })}
           </ul>
@@ -277,7 +292,7 @@ class App extends React.Component {
           <label htmlFor="memory">A memory from the Concert</label>
 
           <input type="submit" value="Add Entry" />
-          <h2>Artists {this.state.displayName} has seen</h2>
+          <h2>Artists {this.state.displayName} has seen in concert!</h2>
           <ul>
             {this.state.artistsSeen.map((journal) => {
               return <JournalItem
