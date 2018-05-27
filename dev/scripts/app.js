@@ -54,12 +54,6 @@ class App extends React.Component {
         this.setState({
           displayName: user,
           userId: userId
-        }, () => {
-          const userInfo = {
-            // displayName: this.state.displayName,
-            userId: this.state.userId,
-          }
-          firebase.database().ref(`users/${this.state.userId}`).set(userInfo);
         })
       })
       // this will catch an error, its a promise method
@@ -115,7 +109,6 @@ class App extends React.Component {
             for (let item in data) {
               console.log(item);
               console.log(data[item].key)
-
               data[item].key = item;
 
               journalArray.push(data[item])
