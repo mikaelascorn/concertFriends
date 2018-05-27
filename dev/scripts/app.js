@@ -39,7 +39,7 @@ class App extends React.Component {
     this.handleSubmitJournal = this.handleSubmitJournal.bind(this);
     this.logout = this.logout.bind(this);
     this.loginWithGoogle = this.loginWithGoogle.bind(this);
-    // this.topShows = this.topShows.bind(this);
+    this.removeJournal = this.removeJournal.bind(this);
   }
 
   loginWithGoogle() {
@@ -54,12 +54,6 @@ class App extends React.Component {
         this.setState({
           displayName: user,
           userId: userId
-        }, () => {
-          const userInfo = {
-            // displayName: this.state.displayName,
-            userId: this.state.userId,
-          }
-          firebase.database().ref(`users/${this.state.userId}`).set(userInfo);
         })
       })
       // this will catch an error, its a promise method
@@ -80,7 +74,7 @@ class App extends React.Component {
     });
   }
 
-  // check on load if there is a user logged in alread, if so set the states accordingly
+  // check on load if there is a user logged in already, if so set the states accordingly
   componentWillMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -88,7 +82,7 @@ class App extends React.Component {
         // console.log(user);
         this.setState({
           loggedIn: true,
-          displayName: user.displayName,
+          // displayName: user.displayName,
           userId: user.uid,
         })
       } else {
@@ -99,7 +93,6 @@ class App extends React.Component {
 
   // Checking if we already have the users information from firebase
   componentDidMount() {
-    // setup the event listener, make reference to the key in firebase
     // this.dbRef = firebase.database().ref(`users/`);
     // this method gets a user passed, if theres a user
     firebase.auth().onAuthStateChanged((user) => {
@@ -111,7 +104,6 @@ class App extends React.Component {
           .on('value', (snapshot) => {
             const data = snapshot.val();
             // console.log(data);
-
             const journalArray = [];
 
             for (let item in data) {
@@ -171,32 +163,35 @@ class App extends React.Component {
       allShows: finalShows
     })
   }
+
   // dont set state in top shows 
   dateToString(finalShows) {
-    const sliceTime = finalShows[0].datetime.slice(11);
-    console.log(sliceTime);
-
-    const sliceDate = finalShows[0].datetime.slice(0, 10);
-    console.log(sliceDate);
-
-    const sliceDay = sliceDate.slice(8, 10);
-    console.log(sliceDay);
-
-    const sliceMonth = sliceDate.slice(5, 7);
-    console.log(sliceMonth);
-
-    const sliceYear = sliceDate.slice(0, 4);
-    console.log(sliceYear);
-
-    let finalDate = {
-      month: sliceMonth,
-      day: sliceDay,
-      year: sliceYear,
-      time: sliceTime
+    for (let index = 0; index < finalShows.length; ++index) {
+      const sliceTime = finalShows[index].datetime.slice(11);
+      // console.log(sliceTime);
+      const sliceDate = finalShows[index].datetime.slice(0, 10);
+      // console.log(sliceDate);
+      const sliceDay = sliceDate.slice(8, 10);
+      // console.log(sliceDay);
+      const sliceMonth = sliceDate.slice(5, 7);
+      // console.log(sliceMonth);
+      const sliceYear = sliceDate.slice(0, 4);
+      // console.log(sliceYear);
+      
+      let finalDate = {
+        month: sliceMonth,
+        day: sliceDay,
+        year: sliceYear,
+        time: sliceTime
+      }
+      console.log(finalDate);
+      // finalShows.push(finalDate)
     }
-    return
-    // finalShows.push(finalDate)
+    return 
     // allShows.push(finalDate)
+    // this.setState({
+    //   allShows: finalShows
+    // })
     // Then we can use that to set state and display the date we want
   }
 
@@ -211,17 +206,18 @@ class App extends React.Component {
     const dbRef = firebase.database().ref(`users/${this.state.userId}`);
     dbRef.push(userSeen);
     console.log(dbRef);
-    // THIS WILL MAKE A CLONE OF THE ARRAY ARTISTS SEEN AND THEN PUSH TO THE NEW ARRAY, SO WE CAN RESET STATE EMPTY AND WE CAN HAVE THE ITEMS STAY ON THE PAGE
-    // const temporaryArray = this.state.artistsSeen;
-    // temporaryArray.push(userSeen);
-    // new array, of items and set state to that array to display on page 
+
     this.setState({
       artistSeen: '',
       seenDate: '',
       seenLocation: '',
       seenMemory: '',
-      // artistsSeen: temporaryArray
     })
+  }
+
+  removeJournal(journalToRemove) {
+    console.log('hi');
+    firebase.database().ref(`users/${this.state.userId}/${journalToRemove}`).remove();
   }
 
   render() {
@@ -260,9 +256,17 @@ class App extends React.Component {
         </form>
         <form onSubmit={this.handleSubmitJournal}>
           <input type="text" name="artistSeen" value={this.state.artistSeen} onChange={this.handleChange} />
+          <label htmlFor="artist">Artist Name</label>
+
           <input type="text" name="seenDate" value={this.state.seenDate} onChange={this.handleChange} />
+          <label htmlFor="date">Date of the Concert</label>
+
           <input type="text" name="seenLocation" value={this.state.seenLocation} onChange={this.handleChange} />
+          <label htmlFor="location">Location of the Concert</label>
+
           <textarea name="" id="" cols="10" rows="10" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
+          <label htmlFor="memory">A memory from the Concert</label>
+
           <input type="submit" value="Add Entry" />
           <h2>Artists {this.state.displayName} has seen</h2>
           <ul>
@@ -270,6 +274,7 @@ class App extends React.Component {
               return <JournalItem
                 key={journal.key}
                 firebaseKey={journal.key}
+                removeJournal={this.removeJournal}
                 artist={journal.artist}
                 date={journal.date}
                 location={journal.location}
