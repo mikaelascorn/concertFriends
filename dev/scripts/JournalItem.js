@@ -10,6 +10,5 @@ const JournalItem = (props) => {
     </li>
   )
 }
-
-
+  
 export default JournalItem;

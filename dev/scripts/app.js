@@ -23,15 +23,18 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
+      // API search done by user
       artistName: '',
       allShows: [],
-      loggedIn: false,
-      displayName: '',
+      // Journal entries
       artistSeen: '',
       seenDate: '',
       seenLocation: '',
       seenMemory: '',
       artistsSeen: [],
+      // logged in
+      displayName: '',
+      loggedIn: false,
       userId: ''
     };
     this.handleChange = this.handleChange.bind(this);
@@ -49,17 +52,17 @@ class App extends React.Component {
       .then((result) => {
         // grab info from user here 
         const user = result.user.displayName;
-        const userId = result.user.uid;
+        // const userId = result.user.uid;
         // console.log(result.user.displayName);
         this.setState({
           displayName: user,
-          userId: userId
+          // userId: userId
         }, () => {
           const userInfo = {
             displayName: this.state.displayName,
-            userId: this.state.userId,
+            // userId: this.state.userId,
           }
-          firebase.database().ref(`users/${this.state.userId}`).set(userInfo);
+          firebase.database().ref(`users/${this.state.displayName}`).set(userInfo);
         })
       })
       // this will catch an error, its a promise method
@@ -80,7 +83,7 @@ class App extends React.Component {
     });
   }
 
-  // check on load if there is a user logged in alread, if so set the states accordingly
+  // check on load if there is a user logged in already, if so set the states accordingly
   componentWillMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -88,8 +91,7 @@ class App extends React.Component {
         console.log(user);
         this.setState({
           loggedIn: true,
-          displayName: user.displayName,
-          userId: user.uid,
+          displayName: user.displayName
         })
       } else {
         console.log('no users logged in');
@@ -99,15 +101,27 @@ class App extends React.Component {
 
   // Checking if we already have the users information from firebase
   componentDidMount() {
+    const googleID = this.state.displayName;
     // setup the event listener, make reference to the key in firebase
-    this.dbRef = firebase.database().ref(`users/`);
+    const dbRef = firebase.database().ref(`users/${googleID}`);
     // this method gets a user passed, if theres a user
     firebase.auth().onAuthStateChanged((user) => {
       // console.log(user);
       if (user !== null) {
         // theres no data for the user to get, we need to allow them to get the access to the data when they login
-        this.dbRef.on('value', (snapshot) => {
+        dbRef.on('value', (snapshot) => {
           // console.log(snapshot.val());
+          const data = snapshot.val();
+          console.log(data);
+          const concertArray = [];
+          // if (data[item] === googleID) {
+            for(let item in data) {
+              console.log(item);
+              console.log(data[item]);
+      
+              data[item].key = item;
+              concertArray.push(data[item])
+            }
         });
         this.setState({
           loggedIn: true,
@@ -191,7 +205,9 @@ class App extends React.Component {
       location: this.state.seenLocation,
       memory: this.state.seenMemory
     }
-    const dbRef = firebase.database().ref(`users/${this.state.userId}`);
+    const googleID = this.state.displayName;
+
+    const dbRef = firebase.database().ref(`users/`);
     dbRef.push(userSeen);
     // THIS WILL MAKE A CLONE OF THE ARRAY ARTISTS SEEN AND THEN PUSH TO THE NEW ARRAY, SO WE CAN RESET STATE EMPTY AND WE CAN HAVE THE ITEMS STAY ON THE PAGE
     const temporaryArray = this.state.artistsSeen;
@@ -205,6 +221,10 @@ class App extends React.Component {
       artistsSeen: []
     })
   }
+
+  // removeJournal(keyToRemove) {
+  //   firebase.database().ref(`Question/${keyToRemove}`).remove();
+  // }
 
   render() {
     return (
@@ -256,15 +276,18 @@ class App extends React.Component {
           <input type="submit" value="Add Entry" />
           <h2>Artists {this.state.displayName} has seen</h2>
           <ul>
-            {this.state.artistsSeen.map((journal, i) => {
+            {this.state.artistsSeen.map((journal) => {
               console.log(journal);
               
               return <JournalItem
-                key={i}
+                key={journal.key}
                 artist={journal.artistSeen}
                 date={journal.seenDate}
                 location={journal.seenLocation}
                 memory={journal.seenMemory}
+                firebaseKey={journal.key}
+                firebaseDisplay={journal.artistsSeen}
+                // removeJournal={this.remove}
               />
             })}
           </ul>
