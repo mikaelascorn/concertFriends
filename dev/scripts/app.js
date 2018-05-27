@@ -6,7 +6,6 @@ import firebase, { auth, provider } from 'firebase';
 import ShowItem from './ShowItem';
 import JournalItem from './JournalItem';
 
-
 var config = {
   apiKey: "AIzaSyBEqlA21ilIP2aDVHm6KhvprRhz6xkyG4k",
   authDomain: "iheartconcerts-80ab6.firebaseapp.com",
@@ -107,8 +106,6 @@ class App extends React.Component {
             const journalArray = [];
 
             for (let item in data) {
-              console.log(item);
-              console.log(data[item].key)
               data[item].key = item;
 
               journalArray.push(data[item])
