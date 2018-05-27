@@ -18,6 +18,7 @@ var config = {
 
 firebase.initializeApp(config);
 
+
 class App extends React.Component {
 
   constructor() {
@@ -84,7 +85,7 @@ class App extends React.Component {
         // console.log(user);
         this.setState({
           loggedIn: true,
-          // displayName: user.displayName,
+          displayName: user.displayName,
           userId: user.uid,
         })
       } else {
@@ -138,6 +139,10 @@ class App extends React.Component {
 
   handleSubmitUpcoming(e) {
     e.preventDefault();
+    this.setState({
+      allShows: [],
+      artistName: ''
+    })
     let theArtist = ''
     theArtist = this.state.artistName;
     axios({
@@ -149,14 +154,14 @@ class App extends React.Component {
       .then((res) => {
         // console.log('yes');
         // console.log(res.data);
-        const allShowsClone = Array.from(this.state.allShows);
+        let allShowsClone = Array.from(this.state.allShows);
         allShowsClone.push(res.data);
         this.topShows(allShowsClone);
-      })
+      }) 
   }
 
   topShows(allShowsClone) {
-    const finalShows = allShowsClone[0].slice(0, 5);
+    let finalShows = allShowsClone[0].slice(0, 5);
     console.log(finalShows);
 
     this.dateToString(finalShows)
@@ -221,6 +226,8 @@ class App extends React.Component {
     console.log('hi');
     firebase.database().ref(`users/${this.state.userId}/${journalToRemove}`).remove();
   }
+
+  
 
   render() {
     return (
