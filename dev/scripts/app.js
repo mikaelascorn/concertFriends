@@ -32,7 +32,6 @@ class App extends React.Component {
       seenLocation: '',
       seenMemory: '',
       artistsSeen: [],
-      // user: null,
       userId: ''
     };
     this.handleChange = this.handleChange.bind(this);
@@ -60,7 +59,7 @@ class App extends React.Component {
             displayName: this.state.displayName,
             userId: this.state.userId,
           }
-          firebase.database().ref(`users/${this.state.userId}`).set(userInfo);
+          firebase.database().ref(`users/${this.state.displayName}`).set(userInfo);
         })
       })
       // this will catch an error, its a promise method
@@ -86,7 +85,7 @@ class App extends React.Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log('user logged in');
-        console.log(user);
+        // console.log(user);
         this.setState({
           loggedIn: true,
           displayName: user.displayName,
@@ -101,14 +100,16 @@ class App extends React.Component {
   // Checking if we already have the users information from firebase
   componentDidMount() {
     // setup the event listener, make reference to the key in firebase
-    this.dbRef = firebase.database().ref(`users/`);
+    // this.dbRef = firebase.database().ref(`users/`);
     // this method gets a user passed, if theres a user
     firebase.auth().onAuthStateChanged((user) => {
       // console.log(user);
       if (user !== null) {
+        firebase.database().ref(`users/${this.state.displayName}`)
+        // console.log(user);
         // theres no data for the user to get, we need to allow them to get the access to the data when they login
-        this.dbRef.on('value', (snapshot) => {
-          // console.log(snapshot.val());
+        .on('value', (snapshot) => {
+          console.log(snapshot.val());
         });
         this.setState({
           loggedIn: true,
@@ -193,17 +194,18 @@ class App extends React.Component {
       location: this.state.seenLocation,
       memory: this.state.seenMemory
     }
-    const dbRef = firebase.database().ref(`users/${this.state.userId}`);
+    const dbRef = firebase.database().ref(`users/${this.state.displayName}`);
     dbRef.push(userSeen);
+    console.log(dbRef);
     // THIS WILL MAKE A CLONE OF THE ARRAY ARTISTS SEEN AND THEN PUSH TO THE NEW ARRAY, SO WE CAN RESET STATE EMPTY AND WE CAN HAVE THE ITEMS STAY ON THE PAGE
     const temporaryArray = this.state.artistsSeen;
     temporaryArray.push(userSeen);
     // new array, of items and set state to that array to display on page 
     this.setState({
-      // artistSeen: '',
-      // seenDate: '',
-      // seenLocation: '',
-      // seenMemory: '',
+      artistSeen: '',
+      seenDate: '',
+      seenLocation: '',
+      seenMemory: '',
       artistsSeen: temporaryArray
     })
   }
