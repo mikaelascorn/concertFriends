@@ -64,12 +64,12 @@ class App extends React.Component {
   logout() {
     firebase.auth().signOut();
     //turn the listener off and on
-    this.dbRef.off('value');
-    console.log('signed out!');
+    
     this.setState({
       allShows: [],
       userId: '',
-      displayName: ''
+      displayName: '',
+      loggedIn: false
     });
   }
 
