@@ -83,7 +83,7 @@ class App extends React.Component {
         // console.log(user);
         this.setState({
           loggedIn: true,
-          // displayName: user.displayName,
+          displayName: user.displayName,
           userId: user.uid,
         })
       } else {
@@ -136,10 +136,24 @@ class App extends React.Component {
 
   handleSubmitUpcoming(e) {
     e.preventDefault();
+    this.setState({
+      allShows: [],
+      artistName: ''
+    })
     let theArtist = ''
     theArtist = this.state.artistName;
     console.log(theArtist);
-    
+    axios({
+      url: `https://rest.bandsintown.com/artists/${theArtist}/`,
+      params: {
+        app_id: `6e7ce2bb9f77b677bc181759630ddcf4`
+      }
+    }) 
+      .then((res) => {
+        // console.log('yes');
+        console.log(res.data);
+        
+      }) 
     axios({
       url: `https://rest.bandsintown.com/artists/${theArtist}/events/`,
       params: {
@@ -148,19 +162,16 @@ class App extends React.Component {
     })
     .then((res) => {
       // console.log('yes');
-      // console.log(res.data);
+      console.log(res.data);
       let allShowsClone = Array.from(this.state.allShows);
       allShowsClone.push(res.data);
       this.topShows(allShowsClone);
-    })
-    this.setState({
-      artistName: ''
-    })
+    }) 
   }
 
   topShows(allShowsClone) {
-    console.log(allShowsClone);
     let finalShows = allShowsClone[0].slice(0, 5);
+    console.log(finalShows);
 
     this.dateToString(finalShows)
 
@@ -229,6 +240,8 @@ class App extends React.Component {
     return (
       <div>
         <div>
+          <h1>I Heart Concerts</h1>
+          <h2>One place to search for upcoming concerts by your favourite artists and keep a journal of memories from past concerts you've attended!</h2>
           {this.state.loggedIn === false && <button onClick={this.loginWithGoogle}>Login with Google</button>}
           {this.state.loggedIn === true ? <button onClick={this.logout}>Logout</button> : null}
         </div>
@@ -242,7 +255,7 @@ class App extends React.Component {
             <option value=""></option>
           </select> */}
           <input type="submit" value="Artist Search" />
-          <h2>Upcoming Shows</h2>
+          <h2>Upcoming Concerts</h2>
           <ul>
             {this.state.allShows.map((showItem, i) => {
               //How many results do we want to show?
@@ -254,7 +267,7 @@ class App extends React.Component {
                 city={showItem.venue.city}
                 date={showItem.datetime}
                 description={showItem.description}
-                ticketsLink={showItem.url}
+                ticketsLink={showItem.offers[0].url}
               />
             })}
           </ul>
@@ -273,7 +286,7 @@ class App extends React.Component {
           <label htmlFor="memory">A memory from the Concert</label>
 
           <input type="submit" value="Add Entry" />
-          <h2>Artists {this.state.displayName} has seen</h2>
+          <h2>Artists {this.state.displayName} has seen in concert!</h2>
           <ul>
             {this.state.artistsSeen.map((journal) => {
               return <JournalItem
