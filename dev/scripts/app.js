@@ -109,8 +109,25 @@ class App extends React.Component {
         // console.log(user);
         // theres no data for the user to get, we need to allow them to get the access to the data when they login
         .on('value', (snapshot) => {
-          console.log(snapshot.val());
-        });
+          const data = snapshot.val();
+          // console.log(data);
+
+          const journalArray = [];
+          console.log(journalArray);
+
+          for (let item in data) {
+            console.log(item);
+            console.log(data[item].key)
+
+            data[item].key = item;
+
+            journalArray.push(data[item])
+            console.log(journalArray);
+          }
+          this.setState({
+            artistsSeen: journalArray
+          })
+        })
         this.setState({
           loggedIn: true,
         })
@@ -198,15 +215,15 @@ class App extends React.Component {
     dbRef.push(userSeen);
     console.log(dbRef);
     // THIS WILL MAKE A CLONE OF THE ARRAY ARTISTS SEEN AND THEN PUSH TO THE NEW ARRAY, SO WE CAN RESET STATE EMPTY AND WE CAN HAVE THE ITEMS STAY ON THE PAGE
-    const temporaryArray = this.state.artistsSeen;
-    temporaryArray.push(userSeen);
+    // const temporaryArray = this.state.artistsSeen;
+    // temporaryArray.push(userSeen);
     // new array, of items and set state to that array to display on page 
     this.setState({
       artistSeen: '',
       seenDate: '',
       seenLocation: '',
       seenMemory: '',
-      artistsSeen: temporaryArray
+      // artistsSeen: temporaryArray
     })
   }
 
@@ -252,13 +269,14 @@ class App extends React.Component {
           <input type="submit" value="Add Entry" />
           <h2>Artists {this.state.displayName} has seen</h2>
           <ul>
-            {this.state.artistsSeen.map((journal, i) => {
+            {this.state.artistsSeen.map((journal) => {
               return <JournalItem
-                key={i}
-                artist={journal.artistSeen}
-                date={journal.seenDate}
-                location={journal.seenLocation}
-                memory={journal.seenMemory}
+                key={journal.key}
+                firebaseKey={journal.key}
+                artist={journal.artist}
+                date={journal.date}
+                location={journal.location}
+                memory={journal.memory}
               />
             })}
           </ul>
