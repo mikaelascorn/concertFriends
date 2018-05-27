@@ -106,27 +106,27 @@ class App extends React.Component {
       // console.log(user);
       if (user !== null) {
         firebase.database().ref(`users/${this.state.displayName}`)
-        // console.log(user);
-        // theres no data for the user to get, we need to allow them to get the access to the data when they login
-        .on('value', (snapshot) => {
-          const data = snapshot.val();
-          // console.log(data);
+          // console.log(user);
+          // theres no data for the user to get, we need to allow them to get the access to the data when they login
+          .on('value', (snapshot) => {
+            const data = snapshot.val();
+            // console.log(data);
 
-          const journalArray = [];
+            const journalArray = [];
 
-          for (let item in data) {
-            console.log(item);
-            console.log(data[item].key)
+            for (let item in data) {
+              console.log(item);
+              console.log(data[item].key)
 
-            data[item].key = item;
+              data[item].key = item;
 
-            journalArray.push(data[item])
-            console.log(journalArray);
-          }
-          this.setState({
-            artistsSeen: journalArray
+              journalArray.push(data[item])
+              console.log(journalArray);
+            }
+            this.setState({
+              artistsSeen: journalArray
+            })
           })
-        })
         this.setState({
           loggedIn: true,
         })
@@ -166,7 +166,9 @@ class App extends React.Component {
   topShows(allShowsClone) {
     const finalShows = allShowsClone[0].slice(0, 5);
     console.log(finalShows);
+
     this.dateToString(finalShows)
+
     this.setState({
       allShows: finalShows
     })
@@ -194,8 +196,7 @@ class App extends React.Component {
       year: sliceYear,
       time: sliceTime
     }
-    return 
-   
+    return
     // finalShows.push(finalDate)
     // allShows.push(finalDate)
     // Then we can use that to set state and display the date we want
@@ -221,7 +222,7 @@ class App extends React.Component {
       seenDate: '',
       seenLocation: '',
       seenMemory: '',
-      artistsSeen: []
+      // artistsSeen: temporaryArray
     })
   }
 
@@ -260,23 +261,14 @@ class App extends React.Component {
           </ul>
         </form>
         <form onSubmit={this.handleSubmitJournal}>
-          <input type="text" id="artist" name="artistSeen" value={this.state.artistSeen} onChange={this.handleChange} />
-          <label htmlFor="artist">Artist Name</label>
-
-          <input type="text" id="date" name="seenDate" value={this.state.seenDate} onChange={this.handleChange} />
-          <label htmlFor="date">Date of the Concert</label>
-
-          <input type="text" id="location" name="seenLocation" value={this.state.seenLocation} onChange={this.handleChange} />
-          <label htmlFor="location">Location of the Concert</label>
-
-          <textarea name="" id="memory" cols="15" rows="5" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
-          <label htmlFor="memory">A memory from the Concert</label>
-
+          <input type="text" name="artistSeen" value={this.state.artistSeen} onChange={this.handleChange} />
+          <input type="text" name="seenDate" value={this.state.seenDate} onChange={this.handleChange} />
+          <input type="text" name="seenLocation" value={this.state.seenLocation} onChange={this.handleChange} />
+          <textarea name="" id="" cols="10" rows="10" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
           <input type="submit" value="Add Entry" />
           <h2>Artists {this.state.displayName} has seen</h2>
           <ul>
             {this.state.artistsSeen.map((journal) => {
-
               return <JournalItem
                 key={journal.key}
                 firebaseKey={journal.key}
