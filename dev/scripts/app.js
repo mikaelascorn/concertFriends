@@ -56,10 +56,10 @@ class App extends React.Component {
           userId: userId
         }, () => {
           const userInfo = {
-            displayName: this.state.displayName,
+            // displayName: this.state.displayName,
             userId: this.state.userId,
           }
-          firebase.database().ref(`users/${this.state.displayName}`).set(userInfo);
+          firebase.database().ref(`users/${this.state.userId}`).set(userInfo);
         })
       })
       // this will catch an error, its a promise method
@@ -105,7 +105,7 @@ class App extends React.Component {
     firebase.auth().onAuthStateChanged((user) => {
       // console.log(user);
       if (user !== null) {
-        firebase.database().ref(`users/${this.state.displayName}`)
+        firebase.database().ref(`users/${this.state.userId}`)
           // console.log(user);
           // theres no data for the user to get, we need to allow them to get the access to the data when they login
           .on('value', (snapshot) => {
@@ -115,8 +115,6 @@ class App extends React.Component {
             const journalArray = [];
 
             for (let item in data) {
-              console.log(item);
-              console.log(data[item].key)
 
               data[item].key = item;
 
@@ -210,7 +208,7 @@ class App extends React.Component {
       location: this.state.seenLocation,
       memory: this.state.seenMemory
     }
-    const dbRef = firebase.database().ref(`users/${this.state.displayName}`);
+    const dbRef = firebase.database().ref(`users/${this.state.userId}`);
     dbRef.push(userSeen);
     console.log(dbRef);
     // THIS WILL MAKE A CLONE OF THE ARRAY ARTISTS SEEN AND THEN PUSH TO THE NEW ARRAY, SO WE CAN RESET STATE EMPTY AND WE CAN HAVE THE ITEMS STAY ON THE PAGE
