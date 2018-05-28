@@ -243,7 +243,9 @@ class App extends React.Component {
     return (
       <div>
         <div>
-          <h1>I Heart Concerts</h1>
+          <h1>I
+            <img src="/public/hand-blue.svg" alt="hand making the rock-on gesture"/>
+          Concerts</h1>
           <h2>One place to search for upcoming concerts by your favourite artists and keep a journal of memories from past concerts you've attended!</h2>
           {this.state.loggedIn === false && <button onClick={this.loginWithGoogle}>Login with Google</button>}
           {this.state.loggedIn === true ? <button onClick={this.logout}>Logout</button> : null}
