@@ -29,11 +29,13 @@ class WelcomePage extends React.Component {
 
   render() {
     return (
-      <div className="wallpaper" >
-        <div className="wrapper welcomePage" >
-          <h1>Welcome to I Heart Concerts!</h1>
-          <h2>One place to search for upcoming concerts by your favourite artists and keep a journal of memories from past concerts you've attended!</h2>
-          <button onClick={this.loginWithGoogle}>Login with Google</button>
+      <div className="welcomeWallpaper" >
+        <div className="welcomeWrapper" >
+          <div className="welcomePage" >
+            <h1>Welcome to I Heart Concerts!</h1>
+            <h2>One place to search for upcoming concerts by your favourite artists and keep a journal of memories from past concerts you've attended!</h2>
+            <button onClick={this.loginWithGoogle}>Login with Google</button>
+          </div>
         </div>
       </div>
     )

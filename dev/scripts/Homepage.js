@@ -223,80 +223,80 @@ class Homepage extends React.Component {
 
   render() {
     return (
-      <div className="wallpaper" >
-        <div className="wrapper" >
+      <div>
+        <div >
           {this.state.loggedIn === true &&
-            <div>
-              <button onClick={this.logout}>Logout</button> 
-              <h1>I Heart Concerts</h1>
-              <div>
-                <h2>Hi, {this.state.displayName}</h2>
+            <div className="homepageWallpaper" >
+              <div className="homepageWrapper">
+                <button onClick={this.logout}>Logout</button> 
+                <h1>I Heart Concerts</h1>
+                <div>
+                  <h2>Hi, {this.state.displayName}</h2>
+                </div>
+                <form className="bandSearchForm" onSubmit={this.handleSubmitUpcoming}>
+                  <h2>Upcoming Concerts</h2>
+                  <p>Search for shows from your favourite artist.</p>
+                  <input required type="text" name="artistName" value={this.state.artistName} onChange={this.handleChange} placeholder="Artist" />
+                  <input type="submit" value="Artist Search" />
+                  <div className="artistNameImg" >
+                    <h3>{this.state.postedName}</h3>
+                    <img src={this.state.imageArtist} alt="" />
+                  </div>
+                  {this.state.notOnTour === true &&
+                    <p>Sorry, this artist is not on tour. Please search again!</p>
+                  }
+                  <ul>
+                    {this.state.allShows.map((showItem, i) => {
+                      return <ShowItem
+                      key={i}
+                      venue={showItem.venue.name} //Check 2-level-deep labels -ok?
+                      city={showItem.venue.city}
+                      date={showItem.datetime}
+                      url={showItem.offers[0].url}
+                      />
+                    })}
+                  </ul> 
+                </form>
+  
+                <form className="journalForm" onSubmit={this.handleSubmitJournal}>
+                  <h2>Your Concert Journal</h2>
+                  <p>A place for memories and bragging rights!</p>
+                  <div className="journalInputs" >
+                    <label id="artistsSeen" htmlFor="artist">Artist Name</label>
+                    <input type="text" name="artistSeen" value={this.state.artistSeen} onChange={this.handleChange} />
+          
+                    <label id="seenDate" htmlFor="date">Date of the Concert</label>
+                    <input type="text" name="seenDate" value={this.state.seenDate} onChange={this.handleChange} />
+          
+                    <label htmlFor="location">Location of the Concert</label>
+                    <input type="text" name="seenLocation" value={this.state.seenLocation} onChange={this.handleChange} />
+          
+                    <label htmlFor="memory">A memory from the Concert</label>
+                    <textarea name="" id="" cols="10" rows="10" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
+                    <input type="submit" value="Add Entry" />
+                  </div>
+                  <h2>Artists {this.state.displayName} has seen in concert!</h2>
+                  <ul>
+                    {this.state.artistsSeen.map((journal) => {
+                      return <JournalItem
+                      key={journal.key}
+                      firebaseKey={journal.key}
+                      removeJournal={this.removeJournal}
+                      artist={journal.artist}
+                      date={journal.date}
+                      location={journal.location}
+                      memory={journal.memory}
+                      />
+                    })}
+                  </ul>
+                </form>
               </div>
-              <form className="bandSearchForm" onSubmit={this.handleSubmitUpcoming}>
-                <h2>Upcoming Concerts</h2>
-                <p>Search for shows from your favourite artist.</p>
-                <input required type="text" name="artistName" value={this.state.artistName} onChange={this.handleChange} placeholder="Artist" />
-                <input type="submit" value="Artist Search" />
-                <div className="artistNameImg" >
-                  <h3>{this.state.postedName}</h3>
-                  <img src={this.state.imageArtist} alt="" />
-                </div>
-                {this.state.notOnTour === true &&
-                  <p>Sorry, this artist is not on tour. Please search again!</p>
-                }
-                <ul>
-                  {this.state.allShows.map((showItem, i) => {
-                    return <ShowItem
-                    key={i}
-                    venue={showItem.venue.name} //Check 2-level-deep labels -ok?
-                    city={showItem.venue.city}
-                    date={showItem.datetime}
-                    url={showItem.offers[0].url}
-                    />
-                  })}
-                </ul> 
-              </form>
-
-              <form className="journalForm" onSubmit={this.handleSubmitJournal}>
-                <h2>Your Concert Journal</h2>
-                <p>A place for memories and bragging rights!</p>
-                <div className="journalInputs" >
-                  <label id="artistsSeen" htmlFor="artist">Artist Name</label>
-                  <input type="text" name="artistSeen" value={this.state.artistSeen} onChange={this.handleChange} />
-        
-                  <label id="seenDate" htmlFor="date">Date of the Concert</label>
-                  <input type="text" name="seenDate" value={this.state.seenDate} onChange={this.handleChange} />
-        
-                  <label htmlFor="location">Location of the Concert</label>
-                  <input type="text" name="seenLocation" value={this.state.seenLocation} onChange={this.handleChange} />
-        
-                  <label htmlFor="memory">A memory from the Concert</label>
-                  <textarea name="" id="" cols="10" rows="10" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
-                  <input type="submit" value="Add Entry" />
-                </div>
-                <h2>Artists {this.state.displayName} has seen in concert!</h2>
-                <ul>
-                  {this.state.artistsSeen.map((journal) => {
-                    return <JournalItem
-                    key={journal.key}
-                    firebaseKey={journal.key}
-                    removeJournal={this.removeJournal}
-                    artist={journal.artist}
-                    date={journal.date}
-                    location={journal.location}
-                    memory={journal.memory}
-                    />
-                  })}
-                </ul>
-              </form>
             </div>
           }
           {this.state.loggedIn === false &&
-            <div className="wallpaper" >
-              <div className="wrapper goodbyePage" >
-                <h2>Thank you for visiting! See you on the dancefloor!</h2>
-                <img src="http://www.fillmurray.com/300/300" alt="BILL MURRAYS FACE!" />
-              </div>
+            <div className="goodbyePage" >
+              <h2>Thank you for visiting! See you on the dancefloor!</h2>
+              <img src="http://www.fillmurray.com/300/300" alt="BILL MURRAYS FACE!" />
             </div>
           }
         </div>

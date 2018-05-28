@@ -12,8 +12,8 @@ class App extends React.Component {
   render() {
     return(
       <Router history={browserHistory}>
-        <div className="wallpaper" >
-          <div className="wrapper">
+        <div>
+          <div>
             <Route exact path="/" render={ (props) => <WelcomePage 
             router={props}/>}>
             </Route>
