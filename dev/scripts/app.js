@@ -6,6 +6,7 @@ import ShowItem from './ShowItem';
 import JournalItem from './JournalItem';
 import Homepage from './Homepage';
 import WelcomePage from './WelcomePage';
+import Goodbye from './Goodbye'
 
 
 class App extends React.Component {
@@ -17,8 +18,8 @@ class App extends React.Component {
           <Route exact path="/" render={ (props) => <WelcomePage 
           router={props}/>}>
           </Route>
-          <Route path='/Homepage' component={Homepage} />
-          <Link to="/home">Log in!</Link>
+          <Route path='/Homepage' component={Homepage}/>
+          <Route path='/Goodbye' component={Goodbye}/>
         </div>  
       </Router>
     )
