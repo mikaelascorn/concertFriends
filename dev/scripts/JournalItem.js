@@ -1,8 +1,8 @@
 import React from 'react';
 
 const JournalItem = (props) => {
-  return(
-    <li>
+  return (
+    <li className="searchBandItems" >
       <p>Artist Name: {props.artist}</p>
       <p>Date: {props.date}</p>
       <p>Location: {props.location}</p>
@@ -12,5 +12,5 @@ const JournalItem = (props) => {
     </li>
   )
 }
-  
+
 export default JournalItem;
