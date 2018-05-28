@@ -8,12 +8,7 @@ const ShowItem = (props) => {
       <p>City of Concert: {props.city}</p>
       <a href={props.url}>Buy Tickets!</a>
     </li>
-
-
-
-
   )
-
 }
 
 export default ShowItem;
