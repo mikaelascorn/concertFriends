@@ -174,13 +174,16 @@ class App extends React.Component {
   }
 
   topShows(allShowsClone) {
-    let finalShows = allShowsClone[0].slice(0, 5);
-    console.log(finalShows);
-
-    this.dateToString(finalShows)
-    this.setState({
-      allShows: finalShows
-    })
+    if ( allShowsClone => [1] ) {
+      let finalShows = allShowsClone[0].slice(0, 5);
+      console.log(finalShows);
+      this.dateToString(finalShows)
+      this.setState({
+        allShows: finalShows
+      })
+    } else {
+      console.log('hey');
+    }
   }
 
   // dont set state in top shows 
@@ -265,7 +268,6 @@ class App extends React.Component {
           <h2>Upcoming Concerts</h2>
           <ul>
             {this.state.allShows.map((showItem, i) => {
-              //How many results do we want to show?
               return <ShowItem
                 key={i}
                 venue={showItem.venue.name} //Check 2-level-deep labels -ok?
