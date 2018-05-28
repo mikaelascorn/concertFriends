@@ -2,7 +2,7 @@ import React from 'react';
 
 const ShowItem = (props) => {
   return(
-    <li>
+    <li className="journalItems" >
       <p>Date of Concert: {props.date}</p>
       <p>Concert Venue: {props.venue}</p>
       <p>City of Concert: {props.city}</p>

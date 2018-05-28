@@ -223,8 +223,8 @@ class Homepage extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
+      <div className="wallpaper" >
+        <div className="wrapper" >
           {this.state.loggedIn === true &&
             <div>
               <button onClick={this.logout}>Logout</button> 
@@ -232,12 +232,12 @@ class Homepage extends React.Component {
               <div>
                 <h2>Hi, {this.state.displayName}</h2>
               </div>
-              <form onSubmit={this.handleSubmitUpcoming}>
+              <form className="bandSearchForm" onSubmit={this.handleSubmitUpcoming}>
                 <h2>Upcoming Concerts</h2>
                 <p>Search for shows from your favourite artist.</p>
                 <input required type="text" name="artistName" value={this.state.artistName} onChange={this.handleChange} placeholder="Artist" />
                 <input type="submit" value="Artist Search" />
-                <div>
+                <div className="artistNameImg" >
                   <h3>{this.state.postedName}</h3>
                   <img src={this.state.imageArtist} alt="" />
                 </div>
@@ -257,21 +257,24 @@ class Homepage extends React.Component {
                 </ul> 
               </form>
 
-              <form onSubmit={this.handleSubmitJournal}>
-                <input type="text" name="artistSeen" value={this.state.artistSeen} onChange={this.handleChange} />
-                <label id="artistsSeen" htmlFor="artist">Artist Name</label>
-      
-                <input type="text" name="seenDate" value={this.state.seenDate} onChange={this.handleChange} />
-                <label id="seenDate" htmlFor="date">Date of the Concert</label>
-      
-                <input type="text" name="seenLocation" value={this.state.seenLocation} onChange={this.handleChange} />
-                <label htmlFor="location">Location of the Concert</label>
-      
-                <textarea name="" id="" cols="10" rows="10" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
-                <label htmlFor="memory">A memory from the Concert</label>
-                <input type="submit" value="Add Entry" />
+              <form className="journalForm" onSubmit={this.handleSubmitJournal}>
+                <h2>Your Concert Journal</h2>
+                <p>A place for memories and bragging rights!</p>
+                <div className="journalInputs" >
+                  <label id="artistsSeen" htmlFor="artist">Artist Name</label>
+                  <input type="text" name="artistSeen" value={this.state.artistSeen} onChange={this.handleChange} />
+        
+                  <label id="seenDate" htmlFor="date">Date of the Concert</label>
+                  <input type="text" name="seenDate" value={this.state.seenDate} onChange={this.handleChange} />
+        
+                  <label htmlFor="location">Location of the Concert</label>
+                  <input type="text" name="seenLocation" value={this.state.seenLocation} onChange={this.handleChange} />
+        
+                  <label htmlFor="memory">A memory from the Concert</label>
+                  <textarea name="" id="" cols="10" rows="10" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
+                  <input type="submit" value="Add Entry" />
+                </div>
                 <h2>Artists {this.state.displayName} has seen in concert!</h2>
-      
                 <ul>
                   {this.state.artistsSeen.map((journal) => {
                     return <JournalItem
@@ -289,9 +292,11 @@ class Homepage extends React.Component {
             </div>
           }
           {this.state.loggedIn === false &&
-            <div>
-              <h2>Thank you for visiting! See you on the dancefloor!</h2>
-              <img src="http://www.fillmurray.com/300/300" alt="BILL MURRAYS FACE!" />
+            <div className="wallpaper" >
+              <div className="wrapper goodbyePage" >
+                <h2>Thank you for visiting! See you on the dancefloor!</h2>
+                <img src="http://www.fillmurray.com/300/300" alt="BILL MURRAYS FACE!" />
+              </div>
             </div>
           }
         </div>
