@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link, NavLink, browserHistory } from "react-router-dom";
-// import firebase, { auth, provider } from 'firebase';
 import ShowItem from './ShowItem';
 import JournalItem from './JournalItem';
 import Homepage from './Homepage';
@@ -10,30 +9,6 @@ import WelcomePage from './WelcomePage';
 
 
 class App extends React.Component {
-  
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     artistName: '',
-  //     allShows: [],
-  //     imageArtist: '',
-  //     postedName: '',
-  //     loggedIn: false,
-  //     displayName: '',
-  //     artistSeen: '',
-  //     seenDate: '',
-  //     seenLocation: '',
-  //     seenMemory: '',
-  //     artistsSeen: [],
-  //     userId: ''
-  //   };
-  //   this.handleChange = this.handleChange.bind(this);
-  //   this.handleSubmitUpcoming = this.handleSubmitUpcoming.bind(this);
-  //   this.handleSubmitJournal = this.handleSubmitJournal.bind(this);
-  //   this.logout = this.logout.bind(this);
-  //   this.loginWithGoogle = this.loginWithGoogle.bind(this);
-  //   this.removeJournal = this.removeJournal.bind(this);
-  // }
   
   render() {
     return(

@@ -39,35 +39,11 @@ class Homepage extends React.Component {
     this.handleSubmitUpcoming = this.handleSubmitUpcoming.bind(this);
     this.handleSubmitJournal = this.handleSubmitJournal.bind(this);
     this.logout = this.logout.bind(this);
-    this.loginWithGoogle = this.loginWithGoogle.bind(this);
     this.removeJournal = this.removeJournal.bind(this);
-  }
-
-  loginWithGoogle() {
-    console.log('clicked');
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider)
-      .then((result) => {
-        // grab info from user here 
-        const user = result.user.displayName;
-        const userId = result.user.uid;
-        // console.log(result.user.displayName);
-        this.setState({
-          displayName: user,
-          userId: userId
-        })
-      })
-      // this will catch an error, its a promise method
-      .catch((err) => {
-        console.log(err);
-      });
   }
 
   logout() {
     firebase.auth().signOut();
-    //turn the listener off and on
-    // this.dbRef.off('value');
-    // console.log('signed out!');
     this.setState({
       allShows: [],
       userId: '',

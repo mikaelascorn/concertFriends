@@ -1,7 +1,6 @@
 import React from 'react';
 import firebase, { auth, provider } from 'firebase';
 import { BrowserRouter as Router, Route, Link, NavLink, browserHistory } from "react-router-dom";
-// import { createBrowserHistory } from "history";
 
 class WelcomePage extends React.Component {
   constructor() {
@@ -17,20 +16,15 @@ class WelcomePage extends React.Component {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider)
       .then((result) => {
-
         this.setState({
-
           loggedIn: true
         }, () => {
-
           this.props.router.history.push('/Homepage');
         })
       })
-      // this will catch an error, its a promise method
       .catch((err) => {
         console.log(err);
       });
-
   }
 
   render() {
