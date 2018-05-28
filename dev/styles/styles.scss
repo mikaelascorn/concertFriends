@@ -1,24 +1,11 @@
 @import 'setup';
 @import 'utils';
 @import 'typography';
-
+@import 'welcomepage';
+@import 'homepage';
 /*==========================
 GLOBAL STYLES
 ==========================*/ 
-.wallpaper {
-  max-width: 100%;
-  background-image: url(../assets/pattern.png);
-  background-position: center;
-  background-size: cover;
-}
-
-.wrapper {
-  max-width: 80%;
-  margin: 0 auto;
-  height: 100vh;  
-  position: relative;
-}
-
 
 
 /*==========================

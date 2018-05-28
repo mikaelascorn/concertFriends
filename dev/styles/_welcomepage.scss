@@ -1,10 +1,23 @@
-// .welcomePage {
-//   height: 100vh;  
-//   position: relative;
-// }
-.welcomePageText {
+.welcomeWallpaper {
+  max-width: 100%;
+  background-image: url(../assets/pattern.png);
+  background-position: center;
+  background-size: cover;
+}
+.welcomePage {
   position: absolute;
+  background-color: rgba(255,255,255,0.95);
+  margin: 20px;
+  left: 50%;
   top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  padding: 20px;  
   text-align: center;
-  transform: translateY(-50%);
+}
+.welcomeWrapper {
+  max-width: 80%;
+  margin: 0 auto;
+  height: 100vh;  
+  position: relative;
 }
