@@ -1,7 +1,7 @@
 import React from 'react';
 
 const JournalItem = (props) => {
-  return(
+  return (
     <li>
       <p>Artist Name: {props.artist}</p>
       <p>Date: {props.date}</p>
@@ -12,5 +12,5 @@ const JournalItem = (props) => {
     </li>
   )
 }
-  
+
 export default JournalItem;

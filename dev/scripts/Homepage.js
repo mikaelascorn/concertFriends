@@ -26,6 +26,7 @@ class Homepage extends React.Component {
       allShows: [],
       imageArtist: '',
       postedName: '',
+      notOnTour: false,
       loggedIn: false,
       displayName: '',
       artistSeen: '',
@@ -140,22 +141,28 @@ class Homepage extends React.Component {
         app_id: `6e7ce2bb9f77b677bc181759630ddcf4`
       }
     })
-      .then((res) => {
-        // console.log('yes');
-        console.log(res.data);
-        let allShowsClone = Array.from(this.state.allShows);
-        allShowsClone.push(res.data);
-        this.topShows(allShowsClone);
-      })
+    .then((res) => {
+      // console.log('yes');
+      console.log(res.data);
+      let allShowsClone = Array.from(this.state.allShows);
+      allShowsClone.push(res.data);
+      this.topShows(allShowsClone);
+    })
   }
 
   topShows(allShowsClone) {
     let finalShows = allShowsClone[0].slice(0, 5);
     console.log(finalShows);
     this.dateToString(finalShows)
+    console.log(allShowsClone)
+    {allShowsClone[0].length === 0 ? 
+    this.setState({
+      notOnTour: true
+    }): 
     this.setState({
       allShows: finalShows
     })
+  }
   }
 
   // dont set state in top shows 
@@ -219,68 +226,74 @@ class Homepage extends React.Component {
       <div>
         <div>
           {this.state.loggedIn === true &&
-          <div>
-            <button onClick={this.logout}>Logout</button> 
-            <h1>I Heart Concerts</h1>
             <div>
-              <h2>Hi, {this.state.displayName}</h2>
-            </div>
-            <form onSubmit={this.handleSubmitUpcoming}>
-              <input required type="text" name="artistName" value={this.state.artistName} onChange={this.handleChange} placeholder="Artist" />
-              <input type="submit" value="Artist Search" />
+              <button onClick={this.logout}>Logout</button> 
+              <h1>I Heart Concerts</h1>
               <div>
-                <h3>{this.state.postedName}</h3>
-                <img src={this.state.imageArtist} alt="" />
+                <h2>Hi, {this.state.displayName}</h2>
               </div>
-              <h2>Upcoming Concerts</h2>
-              <ul>
-                {this.state.allShows.map((showItem, i) => {
-                  return <ShowItem
-                  key={i}
-                  venue={showItem.venue.name} //Check 2-level-deep labels -ok?
-                  city={showItem.venue.city}
-                  date={showItem.datetime}
-                  url={showItem.offers[0].url}
-                  />
-                })}
-              </ul>
-            </form>
+              <form onSubmit={this.handleSubmitUpcoming}>
+                <h2>Upcoming Concerts</h2>
+                <p>Search for shows from your favourite artist.</p>
+                <input required type="text" name="artistName" value={this.state.artistName} onChange={this.handleChange} placeholder="Artist" />
+                <input type="submit" value="Artist Search" />
+                <div>
+                  <h3>{this.state.postedName}</h3>
+                  <img src={this.state.imageArtist} alt="" />
+                </div>
+                {this.state.notOnTour === true &&
+                  <p>Sorry, this artist is not on tour. Please search again!</p>
+                }
+                <ul>
+                  {this.state.allShows.map((showItem, i) => {
+                    return <ShowItem
+                    key={i}
+                    venue={showItem.venue.name} //Check 2-level-deep labels -ok?
+                    city={showItem.venue.city}
+                    date={showItem.datetime}
+                    url={showItem.offers[0].url}
+                    />
+                  })}
+                </ul> 
+              </form>
 
-            <form onSubmit={this.handleSubmitJournal}>
-              <input type="text" name="artistSeen" value={this.state.artistSeen} onChange={this.handleChange} />
-              <label id="artistsSeen" htmlFor="artist">Artist Name</label>
-    
-              <input type="text" name="seenDate" value={this.state.seenDate} onChange={this.handleChange} />
-              <label id="seenDate" htmlFor="date">Date of the Concert</label>
-    
-              <input type="text" name="seenLocation" value={this.state.seenLocation} onChange={this.handleChange} />
-              <label htmlFor="location">Location of the Concert</label>
-    
-              <textarea name="" id="" cols="10" rows="10" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
-              <label htmlFor="memory">A memory from the Concert</label>
-              <input type="submit" value="Add Entry" />
-              <h2>Artists {this.state.displayName} has seen in concert!</h2>
-    
-              <ul>
-                {this.state.artistsSeen.map((journal) => {
-                  return <JournalItem
-                  key={journal.key}
-                  firebaseKey={journal.key}
-                  removeJournal={this.removeJournal}
-                  artist={journal.artist}
-                  date={journal.date}
-                  location={journal.location}
-                  memory={journal.memory}
-                  />
-                })}
-              </ul>
-            </form>
-          </div>
+              <form onSubmit={this.handleSubmitJournal}>
+                <input type="text" name="artistSeen" value={this.state.artistSeen} onChange={this.handleChange} />
+                <label id="artistsSeen" htmlFor="artist">Artist Name</label>
+      
+                <input type="text" name="seenDate" value={this.state.seenDate} onChange={this.handleChange} />
+                <label id="seenDate" htmlFor="date">Date of the Concert</label>
+      
+                <input type="text" name="seenLocation" value={this.state.seenLocation} onChange={this.handleChange} />
+                <label htmlFor="location">Location of the Concert</label>
+      
+                <textarea name="" id="" cols="10" rows="10" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
+                <label htmlFor="memory">A memory from the Concert</label>
+                <input type="submit" value="Add Entry" />
+                <h2>Artists {this.state.displayName} has seen in concert!</h2>
+      
+                <ul>
+                  {this.state.artistsSeen.map((journal) => {
+                    return <JournalItem
+                    key={journal.key}
+                    firebaseKey={journal.key}
+                    removeJournal={this.removeJournal}
+                    artist={journal.artist}
+                    date={journal.date}
+                    location={journal.location}
+                    memory={journal.memory}
+                    />
+                  })}
+                </ul>
+              </form>
+            </div>
           }
-          <div>
-            <h2>Thank you for visiting! See you on the dancefloor!</h2>
-            <img src="http://www.fillmurray.com/300/300" alt="BILL MURRAYS FACE!" />
-          </div>
+          {this.state.loggedIn === false &&
+            <div>
+              <h2>Thank you for visiting! See you on the dancefloor!</h2>
+              <img src="http://www.fillmurray.com/300/300" alt="BILL MURRAYS FACE!" />
+            </div>
+          }
         </div>
       </div>
     )

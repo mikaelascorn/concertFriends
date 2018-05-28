@@ -6,8 +6,6 @@ import ShowItem from './ShowItem';
 import JournalItem from './JournalItem';
 import Homepage from './Homepage';
 import WelcomePage from './WelcomePage';
-import Goodbye from './Goodbye'
-
 
 class App extends React.Component {
   
@@ -19,7 +17,6 @@ class App extends React.Component {
           router={props}/>}>
           </Route>
           <Route path='/Homepage' component={Homepage}/>
-          <Route path='/Goodbye' component={Goodbye}/>
         </div>  
       </Router>
     )
