@@ -292,11 +292,9 @@ class Homepage extends React.Component {
             </div>
           }
           {this.state.loggedIn === false &&
-            <div className="wallpaper" >
-              <div className="wrapper goodbyePage" >
-                <h2>Thank you for visiting! See you on the dancefloor!</h2>
-                <img src="http://www.fillmurray.com/300/300" alt="BILL MURRAYS FACE!" />
-              </div>
+            <div className="goodbyePage" >
+              <h2>Thank you for visiting! See you on the dancefloor!</h2>
+              <img src="http://www.fillmurray.com/300/300" alt="BILL MURRAYS FACE!" />
             </div>
           }
         </div>
