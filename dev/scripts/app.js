@@ -260,17 +260,16 @@ class App extends React.Component {
             <option value=""></option>
           </select> */}
           <input type="submit" value="Artist Search" />
-          <h2>Upcoming Concerts</h2>
-          <h3>{this.state.postedName}</h3>
           <div>
-            <img src={this.state.imageArtist} alt="image of the artist user searched"/>
+            <h3>{this.state.postedName}</h3>
+            <img src={this.state.imageArtist} alt=""/>
           </div>
+          <h2>Upcoming Concerts</h2>
           <ul>
             {this.state.allShows.map((showItem, i) => {
               //How many results do we want to show?
               return <ShowItem
                 key={i}
-                // artist={this.state.postedName}
                 venue={showItem.venue.name} //Check 2-level-deep labels -ok?
                 city={showItem.venue.city}
                 date={showItem.datetime}
@@ -282,10 +281,10 @@ class App extends React.Component {
         </form>
         <form onSubmit={this.handleSubmitJournal}>
           <input type="text" name="artistSeen" value={this.state.artistSeen} onChange={this.handleChange} />
-          <label htmlFor="artist">Artist Name</label>
+          <label id="artistsSeen" htmlFor="artist">Artist Name</label>
 
           <input type="text" name="seenDate" value={this.state.seenDate} onChange={this.handleChange} />
-          <label htmlFor="date">Date of the Concert</label>
+          <label id="seenDate" htmlFor="date">Date of the Concert</label>
 
           <input type="text" name="seenLocation" value={this.state.seenLocation} onChange={this.handleChange} />
           <label htmlFor="location">Location of the Concert</label>
