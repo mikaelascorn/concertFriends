@@ -7,7 +7,7 @@
 .homepageWrapper {
   background-color: rgba(255,255,255,0.95);
   width: 95%;
-  padding-top: 20px;  
+  padding: 20px 10px;
   text-align: center;
   margin: 0px auto;
   height: 100%;
@@ -37,7 +37,6 @@
   padding: 15px;
 
   .showItem {
-    font-size: 1.4rem;
     text-decoration: none;
   }
 }
@@ -52,6 +51,10 @@
   margin: 30px;
   padding: 10px;
   text-align: left;
+  button {
+    margin: 0 auto;
+    display: block;
+  }
 }
 .signInInfo {
   display: block;
@@ -65,3 +68,4 @@
   margin-top: -10px;
   margin-right: 10px;
 }
+
