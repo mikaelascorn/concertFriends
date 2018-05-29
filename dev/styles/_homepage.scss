@@ -7,7 +7,7 @@
 .homepageWrapper {
   background-color: rgba(255,255,255,0.95);
   width: 70%;
-  padding-top: 70px;  
+  padding-top: 20px;  
   text-align: center;
   margin: 0px auto;
   height: 100%;
@@ -55,11 +55,14 @@
   }
 }
 .signInInfo {
-  text-align: left;
   display: block;
+  text-align: right;
 }
 .googlePhoto {
   max-width: 50px;
   border-radius: 50%;
 }
-
+.logoutButton {
+  margin-top: -10px;
+  margin-right: 10px;
+}
