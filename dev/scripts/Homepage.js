@@ -151,7 +151,7 @@ class Homepage extends React.Component {
   }
 
   topShows(allShowsClone) {
-    let finalShows = allShowsClone[0].slice(0, 5);
+    let finalShows = allShowsClone[0].slice(0, 6);
     console.log(finalShows);
     this.dateToString(finalShows)
     console.log(allShowsClone)
@@ -245,7 +245,7 @@ class Homepage extends React.Component {
                   {this.state.notOnTour === true &&
                     <p>Sorry, this artist is not on tour. Please search again!</p>
                   }
-                  <ul>
+                  <ul className="showList">
                     {this.state.allShows.map((showItem, i) => {
                       return <ShowItem
                       key={i}
@@ -276,7 +276,7 @@ class Homepage extends React.Component {
                     <input type="submit" value="Add Entry" />
                   </div>
                   <h2>Artists {this.state.displayName} has seen in concert!</h2>
-                  <ul>
+                  <ul className="journalList">
                     {this.state.artistsSeen.map((journal) => {
                       return <JournalItem
                       key={journal.key}
