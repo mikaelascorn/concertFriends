@@ -11,6 +11,10 @@
   text-align: center;
   margin: 0px auto;
   height: 100%;
+  h1 {
+    padding-top: 35px;
+
+  }
 }
 .artistNameImg {
   max-width: 250px;
@@ -59,13 +63,19 @@
 .signInInfo {
   display: block;
   text-align: right;
-}
-.googlePhoto {
-  max-width: 50px;
-  border-radius: 50%;
-}
-.logoutButton {
-  margin-top: -10px;
-  margin-right: 10px;
+  .logoutButton {
+    float: right;
+    display:block;
+    line-height: 20px;
+    margin-top: -10px;
+    margin-right: 10px;
+  }
+  .googlePhoto {
+    float: right;
+    display: block;
+    max-width: 40px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
 }
 
