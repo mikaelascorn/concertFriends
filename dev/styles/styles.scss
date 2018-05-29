@@ -15,9 +15,15 @@ GLOBAL STYLES
   }
 }
 .journalInfo {
-  max-width: 90%;
   text-align: center;
   margin: 10px auto;
+  display: block;
+  width: 100%;
+
+  label {
+    display: block;
+    width: 100%;
+  }
 }
 button:hover,
 input[type=submit]:hover {
@@ -48,12 +54,15 @@ textarea:active {
 MEDIA QUERIES
 ==========================*/
 @media(min-width: 750px) {
-  .journalInfo {
+  .journalFloat {
     max-width: 50%;
     float: left;
-    .journalInputs{
+    .journalInputs {
       float: left;
-      width: calc(( 100% / 2 ) - 23px);
-    }    
+      width: calc(( 100% / 2 ));
+    }   
   }
+  .journalMemLoc {
+    max-width: 65%;
+  } 
 }
