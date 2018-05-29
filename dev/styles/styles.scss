@@ -22,11 +22,17 @@ GLOBAL STYLES
     margin-bottom: 5%;
   }
 }
-button {
+button,
+input[type=submit] {
   background-color: transparent;
   border: 2px solid $grey;
   font-size: 1.2rem;
   line-height: 1.5rem;
+  padding: 10px 15px;
+}
+button:hover,
+input[type=submit]:hover {
+  background-color: $pink;
 }
 
 /*==========================
