@@ -26,6 +26,7 @@
 .artistInputs {
   max-width: 80%;
   margin: 0 auto;
+  
 }
 // For some reason, the ul for showItem was getting padding-left from something.
 .showList {
@@ -50,6 +51,7 @@
   padding: 0;
 }
 .searchBandItems {
+  background: white;
   list-style: none;
   border: 2px solid $blue;
   margin: 30px;
@@ -81,5 +83,7 @@
 @media(min-width: 750px) {
   .homepageWrapper {
     max-width: 75%;
+    width: calc((100% / 2 ) - 60px);
+    float: left;
   }
 }
