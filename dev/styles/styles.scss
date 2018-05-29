@@ -36,10 +36,11 @@ textarea {
   padding: 18px 15px;
   margin: 5px;
   font-size: 1.8rem;
-  line-height: 1.5rem;
+  line-height: 2rem;
 }
 input[type=text]:hover,
-textarea:focus {
+textarea:focus,
+textarea:active {
   border: 2px solid $pink;
 }
 /*==========================
