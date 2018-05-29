@@ -1,0 +1,25 @@
+.welcomeWallpaper {
+  max-width: 100%;
+  background-image: url(../../assets/pattern6.png);
+  background-position: center;
+  background-size: cover;
+}
+.welcomePage {
+  position: absolute;
+  background-color: rgba(255,255,255,0.75);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  padding: 20px;  
+  text-align: center;
+}
+.welcomeWrapper {
+  max-width: 95%;
+  margin: 0 auto;
+  height: 100vh;  
+  position: relative;
+  h1 {
+    margin-top: 0px;
+  }
+}

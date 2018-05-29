@@ -1,0 +1,30 @@
+html {
+    font-size: 62.5%;
+    color: $black;
+}
+
+body {
+   font-family: 'Muli', sans-serif;
+}
+
+h1, h2, h3 {
+   font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    font-size: 5rem;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 2.5rem;
+    line-height: 1.57;}
+
+h3 {
+   font-size: 2rem;
+}
+
+p, label, input[type="text"] {
+   font-size: 1.7rem;
+   line-height: 1.5rem;
+}
