@@ -1,13 +1,13 @@
 .homepageWallpaper {
   max-width: 100%;
   background-image: url(../assets/pattern.png);
-  background-repeat: repeat-y;
+  background-repeat: repeat;
   min-height: 100vh;
 }
 .homepageWrapper {
   background-color: rgba(255,255,255,0.95);
   width: 80%;
-  padding-top: 70px;  
+  padding-top: 20px;  
   text-align: center;
   margin: 0px auto;
   height: 100%;
@@ -16,11 +16,14 @@
   max-width: 250px;
 }
 .signInInfo {
-  text-align: left;
   display: block;
+  text-align: right;
 }
 .googlePhoto {
   max-width: 50px;
   border-radius: 50%;
 }
-
+.logoutButton {
+  margin-top: -10px;
+  margin-right: 10px;
+}

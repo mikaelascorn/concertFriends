@@ -142,13 +142,13 @@ class Homepage extends React.Component {
         app_id: `6e7ce2bb9f77b677bc181759630ddcf4`
       }
     })
-    .then((res) => {
-      // console.log('yes');
-      console.log(res.data);
-      let allShowsClone = Array.from(this.state.allShows);
-      allShowsClone.push(res.data);
-      this.topShows(allShowsClone);
-    })
+      .then((res) => {
+        // console.log('yes');
+        console.log(res.data);
+        let allShowsClone = Array.from(this.state.allShows);
+        allShowsClone.push(res.data);
+        this.topShows(allShowsClone);
+      })
   }
 
   topShows(allShowsClone) {
@@ -156,14 +156,16 @@ class Homepage extends React.Component {
     console.log(finalShows);
     this.dateToString(finalShows)
     console.log(allShowsClone)
-    {allShowsClone[0].length === 0 ? 
-    this.setState({
-      notOnTour: true
-    }): 
-    this.setState({
-      allShows: finalShows
-    })
-  }
+    {
+      allShowsClone[0].length === 0 ?
+      this.setState({
+        notOnTour: true
+      }) :
+      this.setState({
+        allShows: finalShows,
+        notOnTour: true
+      })
+    }
   }
 
   // dont set state in top shows 
@@ -230,8 +232,8 @@ class Homepage extends React.Component {
             <div className="homepageWallpaper" >
               <div className="homepageWrapper">
                 <div className="signInInfo">
-                  <button className="logoutButton" onClick={this.logout}>Logout</button> 
-                  <img className="googlePhoto" src={this.state.displayPhoto} alt="A photo from your google"/>
+                  <button className="logoutButton" onClick={this.logout}>Logout</button>
+                  <img className="googlePhoto" src={this.state.displayPhoto} alt="A photo from your google" />
                 </div>
                 <h1>I Heart Concerts</h1>
                 <div>
@@ -252,29 +254,29 @@ class Homepage extends React.Component {
                   <ul>
                     {this.state.allShows.map((showItem, i) => {
                       return <ShowItem
-                      key={i}
-                      venue={showItem.venue.name} //Check 2-level-deep labels -ok?
-                      city={showItem.venue.city}
-                      date={showItem.datetime}
-                      url={showItem.offers[0].url}
+                        key={i}
+                        venue={showItem.venue.name} //Check 2-level-deep labels -ok?
+                        city={showItem.venue.city}
+                        date={showItem.datetime}
+                        url={showItem.offers[0].url}
                       />
                     })}
-                  </ul> 
+                  </ul>
                 </form>
-  
+
                 <form className="journalForm" onSubmit={this.handleSubmitJournal}>
                   <h2>Your Concert Journal</h2>
                   <p>A place for memories and bragging rights!</p>
                   <div className="journalInputs" >
                     <label htmlFor="artist">Artist Name</label>
                     <input type="text" name="artistSeen" id="artist" value={this.state.artistSeen} onChange={this.handleChange} />
-          
+
                     <label htmlFor="date">Date of the Concert</label>
-                  <input type="text" id="date" name="seenDate" value={this.state.seenDate} onChange={this.handleChange} />
-          
+                    <input type="text" id="date" name="seenDate" value={this.state.seenDate} onChange={this.handleChange} />
+
                     <label htmlFor="location">Location of the Concert</label>
                     <input type="text" id="location" name="seenLocation" value={this.state.seenLocation} onChange={this.handleChange} />
-          
+
                     <label htmlFor="memory">A memory from the Concert</label>
                     <textarea name="memory" id="memory" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
                     <input type="submit" value="Add Entry" />
@@ -283,13 +285,13 @@ class Homepage extends React.Component {
                   <ul>
                     {this.state.artistsSeen.map((journal) => {
                       return <JournalItem
-                      key={journal.key}
-                      firebaseKey={journal.key}
-                      removeJournal={this.removeJournal}
-                      artist={journal.artist}
-                      date={journal.date}
-                      location={journal.location}
-                      memory={journal.memory}
+                        key={journal.key}
+                        firebaseKey={journal.key}
+                        removeJournal={this.removeJournal}
+                        artist={journal.artist}
+                        date={journal.date}
+                        location={journal.location}
+                        memory={journal.memory}
                       />
                     })}
                   </ul>
