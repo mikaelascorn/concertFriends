@@ -301,7 +301,7 @@ class Homepage extends React.Component {
                     </div>
                   </div>
                   <input type="submit" value="Add Entry" />
-                  <h2>Artists {this.state.displayName} has seen in concert!</h2>
+                  <h2 className="journalTitle" >Artists {this.state.displayName} has seen in concert!</h2>
                   <ul className="journalList clearfix">
                     {this.state.artistsSeen.map((journal) => {
                       return <JournalItem
