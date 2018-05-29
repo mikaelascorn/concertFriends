@@ -1,7 +1,7 @@
 .homepageWallpaper {
   max-width: 100%;
-  background-image: url(../assets/pattern.png);
-  background-repeat: repeat;
+  background-image: url(../assets/pattern5.png);
+  background-repeat: repeat-y;
   min-height: 100vh;
 }
 .homepageWrapper {
@@ -12,8 +12,47 @@
   margin: 0px auto;
   height: 100%;
 }
-.artistNameImg img {
+.artistNameImg {
   max-width: 250px;
+  margin: 0 auto;
+
+  h3 {
+    font-size: 3rem;
+  }
+  img {
+    width: 100%; 
+  }
+}
+// For some reason, the ul for showItem was getting padding-left from something.
+.showList {
+  width: 40%;
+  margin: 0 auto;
+  padding: 0;
+}
+.showItems {
+  list-style: none;
+  border: 2px solid $blue;
+  margin: 30px;
+  text-align: left;
+
+  .showItem {
+    font-size: 1.4rem;
+  }
+}
+.journalList {
+  width: 40%;
+  margin: 0 auto;
+  padding: 0;
+}
+.searchBandItems {
+  list-style: none;
+  border: 2px solid $blue;
+  margin: 30px;
+  text-align: left;
+
+  .searchBandItem {
+    font-size: 1.4rem;
+  }
 }
 .signInInfo {
   display: block;

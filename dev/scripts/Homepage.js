@@ -152,18 +152,17 @@ class Homepage extends React.Component {
   }
 
   topShows(allShowsClone) {
-    let finalShows = allShowsClone[0].slice(0, 5);
+    let finalShows = allShowsClone[0].slice(0, 6);
     console.log(finalShows);
     this.dateToString(finalShows)
     console.log(allShowsClone)
-    {
-      allShowsClone[0].length === 0 ?
+    {allShowsClone[0].length === 0 ? 
       this.setState({
         notOnTour: true
-      }) :
+      }): 
       this.setState({
         allShows: finalShows,
-        notOnTour: true
+        notOnTour: false
       })
     }
   }
@@ -251,7 +250,7 @@ class Homepage extends React.Component {
                   {this.state.notOnTour === true &&
                     <p>Sorry, this artist is not on tour. Please search again!</p>
                   }
-                  <ul>
+                  <ul className="showList">
                     {this.state.allShows.map((showItem, i) => {
                       return <ShowItem
                         key={i}
@@ -282,7 +281,7 @@ class Homepage extends React.Component {
                     <input type="submit" value="Add Entry" />
                   </div>
                   <h2>Artists {this.state.displayName} has seen in concert!</h2>
-                  <ul>
+                  <ul className="journalList">
                     {this.state.artistsSeen.map((journal) => {
                       return <JournalItem
                         key={journal.key}
@@ -302,9 +301,9 @@ class Homepage extends React.Component {
           {this.state.loggedIn === false &&
             <div className="welcomeWallpaper">
               <div className="welcomeWrapper">
-                <div className="welcomePage">
+                <div className="welcomePage goodbyePage">
                   <h2>Thank you for visiting. See you on the dancefloor!</h2>
-                  <img src="assets/logo1.jpg" alt="I Heart Concerts Logo" />
+                  <img src="assets/logo-final.svg" alt="I Heart Concerts Logo" />
                   <p>Made by <a href="http://www.clintdevs.live" target="_blank" >Clint Lee</a> <a href="https://www.mikaelamade.com" target="_blank" >Mikaela Scornaienchi</a> <a href="http://www.nataleecodes.com" target="_blank" >Natalee Blagden</a></p>
                 </div>
               </div>
