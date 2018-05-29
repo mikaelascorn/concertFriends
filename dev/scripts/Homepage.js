@@ -160,7 +160,8 @@ class Homepage extends React.Component {
       notOnTour: true
     }): 
     this.setState({
-      allShows: finalShows
+      allShows: finalShows,
+      notOnTour: false
     })
   }
   }
