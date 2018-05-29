@@ -4,11 +4,26 @@
 @import 'welcomepage';
 @import 'homepage';
 @import 'goodbye';
-@import 'journal';
+
 /*==========================
 GLOBAL STYLES
 ==========================*/ 
+.journalInputs {
+  margin: 0 auto;
+  label{
+    width: 100%;
+  }
+  input[type=text]{
+    width: 100%;
+    margin: 0 auto;
+  }
+  textarea{
+    width: 100%;
+    margin-bottom: 5%;
+  }
+}
 
 /*==========================
 MEDIA QUERIES
 ==========================*/
+
