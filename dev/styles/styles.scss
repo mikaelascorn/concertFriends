@@ -26,7 +26,6 @@ textarea {
   border: 2px solid $grey;
   font-size: 1.8rem;
   line-height: 1.5rem;
-  padding: 18px 15px;
 }
 button:hover,
 input[type=submit]:hover {
@@ -37,6 +36,7 @@ h1 {
     max-width: 75px;
   }
 }
+button,
 input[type=text],
 textarea {
   border: 2px solid $blue;
@@ -50,4 +50,13 @@ textarea:focus {
 /*==========================
 MEDIA QUERIES
 ==========================*/
-
+@media(min-width: 750px) {
+  .journalInfo {
+    max-width: 50%;
+    float: left;
+    .journalInputs{
+      float: left;
+      width: calc(( 100% / 2 ) - 23px);
+    }    
+  }
+}
