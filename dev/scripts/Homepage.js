@@ -153,49 +153,59 @@ class Homepage extends React.Component {
 
   topShows(allShowsClone) {
     let finalShows = allShowsClone[0].slice(0, 6);
+
+    finalShows.forEach((index) => {
+      const sliceTime = [index][0].datetime.slice(11, 16);
+      console.log(sliceTime);
+      const sliceDate = [index][0].datetime.slice(0, 10);
+      const sliceDay = [index][0].datetime.slice(8, 10);
+      const sliceYear = [index][0].datetime.slice(0, 4);
+      let sliceMonth = [index][0].datetime.slice(5, 7);
+
+      if (sliceMonth === "01") {
+        sliceMonth = "January"
+      } else if (sliceMonth === "02") {
+        sliceMonth = "February"
+      } else if (sliceMonth === "03") {
+        sliceMonth = "March"
+      } else if (sliceMonth === "04") {
+        sliceMonth = "April"
+      } else if (sliceMonth === "05") {
+        sliceMonth = "May"
+      } else if (sliceMonth === "06") {
+        sliceMonth = "June"
+      } else if (sliceMonth === "07") {
+        sliceMonth = "July"
+      } else if (sliceMonth === "08") {
+        sliceMonth = "August"
+      } else if (sliceMonth === "09") {
+        sliceMonth = "September"
+      } else if (sliceMonth === "10") {
+        sliceMonth = "October"
+      } else if (sliceMonth === "11") {
+        sliceMonth = "November"
+      } else if (sliceMonth === "12") {
+        sliceMonth = "December"
+      } else {
+        console.log = "Month Error in dateToString method"
+      }
+      const finalDate = `${sliceMonth} ${sliceDay}, ${sliceYear} at ${sliceTime}`;
+      console.log(`The new date is ${finalDate}`);
+      [index][0].datetime = finalDate;
+    })
+
     console.log(finalShows);
-    this.dateToString(finalShows)
-    console.log(allShowsClone)
-    {allShowsClone[0].length === 0 ? 
+
+    {
+      allShowsClone[0].length === 0 ?
       this.setState({
         notOnTour: true
-      }): 
+      }) :
       this.setState({
         allShows: finalShows,
         notOnTour: false
       })
     }
-  }
-
-  // dont set state in top shows 
-  dateToString(finalShows) {
-    for (let index = 0; index < finalShows.length; ++index) {
-      const sliceTime = finalShows[index].datetime.slice(11);
-      // console.log(sliceTime);
-      const sliceDate = finalShows[index].datetime.slice(0, 10);
-      // console.log(sliceDate);
-      const sliceDay = sliceDate.slice(8, 10);
-      // console.log(sliceDay);
-      const sliceMonth = sliceDate.slice(5, 7);
-      // console.log(sliceMonth);
-      const sliceYear = sliceDate.slice(0, 4);
-      // console.log(sliceYear);
-
-      let finalDate = {
-        month: sliceMonth,
-        day: sliceDay,
-        year: sliceYear,
-        time: sliceTime
-      }
-      console.log(finalDate);
-      // finalShows.push(finalDate)
-    }
-    return
-    // allShows.push(finalDate)
-    // this.setState({
-    //   allShows: finalShows
-    // })
-    // Then we can use that to set state and display the date we want
   }
 
   handleSubmitJournal(e) {
@@ -252,7 +262,7 @@ class Homepage extends React.Component {
                   {this.state.notOnTour === true &&
                     <p>Sorry, this artist is not on tour. Please search again!</p>
                   }
-                  <ul className="showList">
+                  <ul className="showList clearfix">
                     {this.state.allShows.map((showItem, i) => {
                       return <ShowItem
                         key={i}
