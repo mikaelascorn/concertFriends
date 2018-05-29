@@ -25,22 +25,24 @@
 }
 // For some reason, the ul for showItem was getting padding-left from something.
 .showList {
-  width: 40%;
+  width: 100%;
   margin: 0 auto;
   padding: 0;
 }
 .showItems {
   list-style: none;
   border: 2px solid $blue;
-  margin: 30px;
+  margin: 15px;
   text-align: left;
+  padding: 15px;
 
   .showItem {
     font-size: 1.4rem;
+    text-decoration: none;
   }
 }
 .journalList {
-  width: 40%;
+  width: 100%;
   margin: 0 auto;
   padding: 0;
 }
@@ -48,6 +50,7 @@
   list-style: none;
   border: 2px solid $blue;
   margin: 30px;
+  padding: 10px;
   text-align: left;
 }
 .signInInfo {
