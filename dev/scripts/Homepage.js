@@ -124,7 +124,7 @@ class Homepage extends React.Component {
     theArtist = this.state.artistName;
     console.log(theArtist);
     axios({
-      url: `https://rest.bandsintown.com/artists/${theArtist}/`,
+      url: `http://rest.bandsintown.com/artists/${theArtist}/`,
       params: {
         app_id: `6e7ce2bb9f77b677bc181759630ddcf4`
       }
@@ -137,7 +137,7 @@ class Homepage extends React.Component {
         })
       })
     axios({
-      url: `https://rest.bandsintown.com/artists/${theArtist}/events/`,
+      url: `http://rest.bandsintown.com/artists/${theArtist}/events/`,
       params: {
         app_id: `6e7ce2bb9f77b677bc181759630ddcf4`
       }
@@ -268,7 +268,7 @@ class Homepage extends React.Component {
                 <form className="journalForm" onSubmit={this.handleSubmitJournal}>
                   <h2>Your Concert Journal</h2>
                   <p>A place for memories and bragging rights!</p>
-                  <div className="journalInputs" >
+                  <div className="journalInputs clearfix" >
                     <div className="journalInfo">
                       <label htmlFor="artist">Artist Name</label>
                       <input type="text" name="artistSeen" id="artist" value={this.state.artistSeen} onChange={this.handleChange} />
@@ -287,7 +287,7 @@ class Homepage extends React.Component {
                       <label htmlFor="memory">A memory from the Concert</label>
                       <textarea name="memory" id="memory" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
                     </div>
-                    
+
                     <input type="submit" value="Add Entry" />
                   </div>
                   <h2>Artists {this.state.displayName} has seen in concert!</h2>
