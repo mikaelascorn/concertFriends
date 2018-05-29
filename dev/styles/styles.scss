@@ -19,14 +19,6 @@ GLOBAL STYLES
   text-align: center;
   margin: 10px auto;
 }
-button,
-input[type=submit],
-textarea {
-  background-color: transparent;
-  border: 2px solid $grey;
-  font-size: 1.8rem;
-  line-height: 1.5rem;
-}
 button:hover,
 input[type=submit]:hover {
   background-color: $pink;
@@ -38,10 +30,13 @@ h1 {
 }
 button,
 input[type=text],
+input[type=submit],
 textarea {
   border: 2px solid $blue;
   padding: 18px 15px;
   margin: 5px;
+  font-size: 1.8rem;
+  line-height: 1.5rem;
 }
 input[type=text]:hover,
 textarea:focus {
