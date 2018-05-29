@@ -234,15 +234,17 @@ class Homepage extends React.Component {
                   <button className="logoutButton" onClick={this.logout}>Logout</button>
                   <img className="googlePhoto" src={this.state.displayPhoto} alt="A photo from your google" />
                 </div>
-                <h1>I Heart Concerts</h1>
+                <h1>I <img src="../../assets/logo-final.svg" alt="I heart concerts logo" /> Concerts</h1>
                 <div>
                   <h2>Hi, {this.state.displayName}</h2>
                 </div>
                 <form className="bandSearchForm" onSubmit={this.handleSubmitUpcoming}>
                   <h2>Upcoming Concerts</h2>
                   <p>Search for shows from your favourite artist.</p>
-                  <input required type="text" name="artistName" value={this.state.artistName} onChange={this.handleChange} placeholder="Artist" />
-                  <input type="submit" value="Artist Search" />
+                  <div className="artistInputs">
+                    <input required type="text" name="artistName" value={this.state.artistName} onChange={this.handleChange} placeholder="Artist" />
+                    <input type="submit" value="Artist Search" />
+                  </div>
                   <div className="artistNameImg" >
                     <h3>{this.state.postedName}</h3>
                     <img src={this.state.imageArtist} alt="" />

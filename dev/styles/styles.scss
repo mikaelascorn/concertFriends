@@ -15,7 +15,11 @@ GLOBAL STYLES
     width: 100%;
   }
   input[type=text]{
+<<<<<<< HEAD
     width: 70%;
+=======
+    max-width: 80%;
+>>>>>>> 0e4c2664d91183c8dcae44015cf70b0c84d14424
     margin: 0 auto;
   }
   textarea{
@@ -27,15 +31,27 @@ button,
 input[type=submit] {
   background-color: transparent;
   border: 2px solid $grey;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   line-height: 1.5rem;
-  padding: 10px 15px;
+  padding: 18px 15px;
 }
 button:hover,
 input[type=submit]:hover {
   background-color: $pink;
 }
-
+h1 {
+  img {
+    max-width: 75px;
+  }
+}
+input[type=text] {
+  border: 2px solid $blue;
+  padding: 18px 15px;
+  margin: 5px;
+}
+input[type=text]:hover {
+  border: 2px solid $pink;
+}
 /*==========================
 MEDIA QUERIES
 ==========================*/
