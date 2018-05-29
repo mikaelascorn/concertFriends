@@ -36,12 +36,34 @@
 .showItems {
   list-style: none;
   border: 2px solid $blue;
+  border-radius: 7px;
   margin: 15px;
   text-align: left;
   padding: 15px;
+  // float: left;
+  // width: calc(( 100% / 4 ) - 23px);
+  // margin: 80px 15px 125px;
+  // border-radius: 8px;
+  // text-align: center;
+  // height: 460px;
+  // max-width: 360px;
+  // box-shadow: 0px 20px 30px 0px rgba(125, 147, 178, 0.3);
+  // -moz-box-shadow: 0px 20px 30px 0px rgba(125, 147, 178, 0.3);
+  // -webkit-box-shadow: 0px 20px 30px 0px rgba(125, 147, 178, 0.3);
+  // padding: 40px;
+  // position: relative;
+  // transition: all 0.5s;
+
   background-color: white;
   .showItem {
     text-decoration: none;
+  }
+  .showTickets {
+    font-size: 2rem;
+    border: 2px solid $blue;
+    padding: 10px;
+    display: inline-block;
+    margin: 0 auto;
   }
 }
 .journalList {
