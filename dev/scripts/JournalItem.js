@@ -3,11 +3,11 @@ import React from 'react';
 const JournalItem = (props) => {
   return (
     <li className="searchBandItems" >
-      <p>Artist Name: {props.artist}</p>
-      <p>Date: {props.date}</p>
-      <p>Location: {props.location}</p>
-      <p>Memories from the Concert</p>
-      <p>{props.memory}</p>
+      <p className="searchBandName searchBandItem">Artist Name: {props.artist}</p>
+      <p className="searchBandDate searchBandItem">Date: {props.date}</p>
+      <p className="searchBandLocation searchBandItem">Location: {props.location}</p>
+      <p className="searchBandMemories searchBandItem">Memories from the Concert</p>
+      <p className="searchBandMemoriesText searchBandItem">{props.memory}</p>
       <button onClick={() => props.removeJournal(props.firebaseKey)}>Remove</button>
     </li>
   )
