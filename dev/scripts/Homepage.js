@@ -228,7 +228,7 @@ class Homepage extends React.Component {
           {this.state.loggedIn === true &&
             <div className="homepageWallpaper" >
               <div className="homepageWrapper">
-                <button onClick={this.logout}>Logout</button> 
+                <button className="logoutButton" onClick={this.logout}>Logout</button> 
                 <h1>I Heart Concerts</h1>
                 <div>
                   <h2>Hi, {this.state.displayName}</h2>
@@ -262,17 +262,17 @@ class Homepage extends React.Component {
                   <h2>Your Concert Journal</h2>
                   <p>A place for memories and bragging rights!</p>
                   <div className="journalInputs" >
-                    <label id="artistsSeen" htmlFor="artist">Artist Name</label>
-                    <input type="text" name="artistSeen" value={this.state.artistSeen} onChange={this.handleChange} />
+                    <label htmlFor="artist">Artist Name</label>
+                    <input type="text" name="artistSeen" id="artist" value={this.state.artistSeen} onChange={this.handleChange} />
           
-                    <label id="seenDate" htmlFor="date">Date of the Concert</label>
-                    <input type="text" name="seenDate" value={this.state.seenDate} onChange={this.handleChange} />
+                    <label htmlFor="date">Date of the Concert</label>
+                  <input type="text" id="date" name="seenDate" value={this.state.seenDate} onChange={this.handleChange} />
           
                     <label htmlFor="location">Location of the Concert</label>
-                    <input type="text" name="seenLocation" value={this.state.seenLocation} onChange={this.handleChange} />
+                    <input type="text" id="location" name="seenLocation" value={this.state.seenLocation} onChange={this.handleChange} />
           
                     <label htmlFor="memory">A memory from the Concert</label>
-                    <textarea name="" id="" cols="10" rows="10" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
+                    <textarea name="memory" id="memory" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
                     <input type="submit" value="Add Entry" />
                   </div>
                   <h2>Artists {this.state.displayName} has seen in concert!</h2>
@@ -294,9 +294,14 @@ class Homepage extends React.Component {
             </div>
           }
           {this.state.loggedIn === false &&
-            <div className="goodbyePage" >
-              <h2>Thank you for visiting! See you on the dancefloor!</h2>
-              <img src="http://www.fillmurray.com/300/300" alt="BILL MURRAYS FACE!" />
+            <div className="welcomeWallpaper">
+              <div className="welcomeWrapper">
+                <div className="welcomePage">
+                  <h2>Thank you for visiting. See you on the dancefloor!</h2>
+                  <img src="assets/logo1.jpg" alt="I Heart Concerts Logo" />
+                  <p>Made by <a href="#" target="_blank" >Clint Lee</a> <a href="https://www.mikaelamade.com" target="_blank" >Mikaela Scornaienchi</a> <a href="https://www.nataleecodes.com" target="_blank" >Natalee Blagden</a></p>
+                </div>
+              </div>
             </div>
           }
         </div>
