@@ -94,5 +94,6 @@
   }
   .searchBandItems {
     float: left;
+    width: calc(( 100% / 2 ) - 60px );
   }
 }
