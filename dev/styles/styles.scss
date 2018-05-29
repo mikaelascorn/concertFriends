@@ -9,16 +9,21 @@
 GLOBAL STYLES
 ==========================*/ 
 .journalInputs {
+  border: 1px solid $grey;
   margin: 0 auto;
   label{
     width: 100%;
   }
   input[type=text]{
+<<<<<<< HEAD
+    width: 70%;
+=======
     max-width: 80%;
+>>>>>>> 0e4c2664d91183c8dcae44015cf70b0c84d14424
     margin: 0 auto;
   }
   textarea{
-    width: 100%;
+    width: 70%;
     margin-bottom: 5%;
   }
 }
@@ -50,4 +55,3 @@ input[type=text]:hover {
 /*==========================
 MEDIA QUERIES
 ==========================*/
-
