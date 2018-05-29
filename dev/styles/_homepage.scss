@@ -60,12 +60,20 @@
 .signInInfo {
   display: block;
   text-align: right;
+  .logoutButton {
+    float: right;
+    display:block;
+    line-height: 20px;
+    margin-top: -10px;
+    margin-right: 10px;
+  }
+  .googlePhoto {
+    float: right;
+    display: block;
+    max-width: 40px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
 }
-.googlePhoto {
-  max-width: 50px;
-  border-radius: 50%;
-}
-.logoutButton {
-  margin-top: -10px;
-  margin-right: 10px;
-}
+
+
