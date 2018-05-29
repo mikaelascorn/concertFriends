@@ -8,6 +8,7 @@
 /*==========================
 GLOBAL STYLES
 ==========================*/ 
+<<<<<<< HEAD
 .journalInputs {
   margin: 0 auto;
   label{
@@ -90,6 +91,8 @@ MEDIA QUERIES
 /*==========================
 GLOBAL STYLES
 ==========================*/ 
+=======
+>>>>>>> 6ebb89260b847c03611b5999ca6aa2f2edf3ff84
 .journalInputs {
   margin: 0 auto;
   label{
@@ -107,6 +110,10 @@ GLOBAL STYLES
     width: 100%;
   }
 }
+button:hover,
+input[type=submit]:hover {
+  background-color: $pink;
+}
 h1 {
   img {
     max-width: 75px;
@@ -122,16 +129,6 @@ textarea {
   margin: 5px;
   font-size: 1.8rem;
   line-height: 2rem;
-}
-button, input[type=submit]{
-  background-color:#dce3fb;
-  border-radius: 3px;
-}
-button:hover,
-input[type=submit]:hover,
-button:active,
-input[type=submit]:active {
-  background-color: $pink;
 }
 input[type=text]:hover,
 textarea:focus,
@@ -162,38 +159,6 @@ MEDIA QUERIES
     min-height: 80px;
   } 
 }
-
-
-@media(min-width: 1600px) {
-  .journalInfo  {
-      width: 25%;
-    }  
-
-    padding: 10px 20px;
-    .journalInputs {
-      float: left;
-      width: calc( 100% / 4 );
-      input#date,
-      input#artist {
-        min-height: 80px;
-      }
-    }  
-    .journalFloat {
-      padding: 20px 10px;
-
-    }
-}
-
-@import 'setup';
-@import 'utils';
-@import 'typography';
-@import 'welcomepage';
-@import 'homepage';
-@import 'goodbye';
-
-/*==========================
-GLOBAL STYLES
-==========================*/ 
 .journalInputs {
   margin: 0 auto;
   label{
@@ -296,6 +261,7 @@ MEDIA QUERIES
 MEDIA QUERIES
 ==========================*/
 
+=======
 
 @media(min-width: 1600px) {
   .journalInfo  {
