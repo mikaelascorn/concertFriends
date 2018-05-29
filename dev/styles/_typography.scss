@@ -4,9 +4,26 @@ html {
 }
 
 body {
-    font-family: 'Muli', sans-serif;
+   font-family: 'Muli', sans-serif;
 }
 
 h1, h2, h3 {
-    font-family: 'Roboto', sans-serif;
+   font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+   font-size: 5rem;
+}
+
+h2 {
+   font-size: 3.5rem;
+}
+
+h3 {
+   font-size: 3rem;
+}
+
+p, label, input[type="text"] {
+   font-size: 1.2rem;
+   line-height: 1.5rem;
 }
