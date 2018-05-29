@@ -5,7 +5,7 @@
   min-height: 100vh;
 }
 .homepageWrapper {
-  background-color: rgba(255,255,255,0.95);
+  background-color: rgba(255,255,255,0.75);
   width: 95%;
   padding: 20px 10px;
   text-align: center;
@@ -67,8 +67,7 @@
     float: right;
     display:block;
     line-height: 20px;
-    margin-top: -10px;
-    margin-right: 10px;
+    padding: 5px;
   }
   .googlePhoto {
     float: right;

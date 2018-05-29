@@ -231,8 +231,8 @@ class Homepage extends React.Component {
             <div className="homepageWallpaper" >
               <div className="homepageWrapper">
                 <div className="signInInfo">
-                  <button className="logoutButton" onClick={this.logout}>Logout</button>
                   <img className="googlePhoto" src={this.state.displayPhoto} alt="A photo from your google" />
+                  <button className="logoutButton" onClick={this.logout}>Logout</button>
                 </div>
                 <h1>I <img src="../../assets/logo-final.svg" alt="I heart concerts logo" /> Concerts</h1>
                 <div>
