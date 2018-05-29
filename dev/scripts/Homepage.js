@@ -231,8 +231,8 @@ class Homepage extends React.Component {
             <div className="homepageWallpaper" >
               <div className="homepageWrapper">
                 <div className="signInInfo">
-                  <img className="googlePhoto" src={this.state.displayPhoto} alt="A photo from your google" />
                   <button className="logoutButton" onClick={this.logout}>Logout</button>
+                  <img className="googlePhoto" src={this.state.displayPhoto} alt="A photo from your google" />
                 </div>
                 <h1>I <img src="../../assets/logo-final.svg" alt="I heart concerts logo" /> Concerts</h1>
                 <div>
@@ -273,7 +273,7 @@ class Homepage extends React.Component {
                       <label htmlFor="artist">Artist Name</label>
                       <input type="text" name="artistSeen" id="artist" value={this.state.artistSeen} onChange={this.handleChange} />
                     </div>
-                  <div className="journalInfo journalFloat">
+                    <div className="journalInfo journalFloat">
                       <label htmlFor="date">Date of the Concert</label>
                       <input type="text" id="date" name="seenDate" value={this.state.seenDate} onChange={this.handleChange} />
                     </div>
