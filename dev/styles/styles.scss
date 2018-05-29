@@ -9,16 +9,17 @@
 GLOBAL STYLES
 ==========================*/ 
 .journalInputs {
+  border: 1px solid $grey;
   margin: 0 auto;
   label{
     width: 100%;
   }
   input[type=text]{
-    width: 100%;
+    width: 70%;
     margin: 0 auto;
   }
   textarea{
-    width: 100%;
+    width: 70%;
     margin-bottom: 5%;
   }
 }
@@ -38,4 +39,3 @@ input[type=submit]:hover {
 /*==========================
 MEDIA QUERIES
 ==========================*/
-
