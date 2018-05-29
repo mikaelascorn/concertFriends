@@ -269,17 +269,25 @@ class Homepage extends React.Component {
                   <h2>Your Concert Journal</h2>
                   <p>A place for memories and bragging rights!</p>
                   <div className="journalInputs" >
-                    <label htmlFor="artist">Artist Name</label>
-                    <input type="text" name="artistSeen" id="artist" value={this.state.artistSeen} onChange={this.handleChange} />
+                    <div className="journalInfo">
+                      <label htmlFor="artist">Artist Name</label>
+                      <input type="text" name="artistSeen" id="artist" value={this.state.artistSeen} onChange={this.handleChange} />
+                    </div>
+                    <div className="journalInfo">
+                      <label htmlFor="date">Date of the Concert</label>
+                      <input type="text" id="date" name="seenDate" value={this.state.seenDate} onChange={this.handleChange} />
+                    </div>
 
-                    <label htmlFor="date">Date of the Concert</label>
-                    <input type="text" id="date" name="seenDate" value={this.state.seenDate} onChange={this.handleChange} />
+                    <div className="journalInfo">
+                      <label htmlFor="location">Location of the Concert</label>
+                      <input type="text" id="location" name="seenLocation" value={this.state.seenLocation} onChange={this.handleChange} />
+                    </div>
 
-                    <label htmlFor="location">Location of the Concert</label>
-                    <input type="text" id="location" name="seenLocation" value={this.state.seenLocation} onChange={this.handleChange} />
-
-                    <label htmlFor="memory">A memory from the Concert</label>
-                    <textarea name="memory" id="memory" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
+                    <div className="journalInfo">
+                      <label htmlFor="memory">A memory from the Concert</label>
+                      <textarea name="memory" id="memory" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
+                    </div>
+                    
                     <input type="submit" value="Add Entry" />
                   </div>
                   <h2>Artists {this.state.displayName} has seen in concert!</h2>
