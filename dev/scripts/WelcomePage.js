@@ -32,7 +32,8 @@ class WelcomePage extends React.Component {
       <div className="welcomeWallpaper" >
         <div className="welcomeWrapper" >
           <div className="welcomePage" >
-            <h1>Welcome to I Heart Concerts!</h1>
+            <h2>Welcome to</h2>
+            <h1>I <img src="../../assets/logo-final.svg" alt="I heart concerts logo" />  Concerts!</h1>
             <h2>One place to search for upcoming concerts by your favourite artists and keep a journal of memories from past concerts you've attended!</h2>
             <button onClick={this.loginWithGoogle}>Login with Google</button>
           </div>
