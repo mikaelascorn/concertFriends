@@ -269,21 +269,21 @@ class Homepage extends React.Component {
                   <h2>Your Concert Journal</h2>
                   <p>A place for memories and bragging rights!</p>
                   <div className="journalInputs clearfix" >
-                    <div className="journalInfo">
+                    <div className="journalInfo journalFloat">
                       <label htmlFor="artist">Artist Name</label>
                       <input type="text" name="artistSeen" id="artist" value={this.state.artistSeen} onChange={this.handleChange} />
                     </div>
-                    <div className="journalInfo">
+                  <div className="journalInfo journalFloat">
                       <label htmlFor="date">Date of the Concert</label>
                       <input type="text" id="date" name="seenDate" value={this.state.seenDate} onChange={this.handleChange} />
                     </div>
 
-                    <div className="journalInfo">
+                    <div className="journalInfo journalMemLoc">
                       <label htmlFor="location">Location of the Concert</label>
                       <input type="text" id="location" name="seenLocation" value={this.state.seenLocation} onChange={this.handleChange} />
                     </div>
 
-                    <div className="journalInfo">
+                    <div className="journalInfo journalMemLoc">
                       <label htmlFor="memory">A memory from the Concert</label>
                       <textarea name="memory" id="memory" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
                     </div>
