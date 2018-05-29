@@ -25,10 +25,6 @@ GLOBAL STYLES
     width: 100%;
   }
 }
-button:hover,
-input[type=submit]:hover {
-  background-color: $pink;
-}
 h1 {
   img {
     max-width: 75px;
@@ -44,6 +40,16 @@ textarea {
   margin: 5px;
   font-size: 1.8rem;
   line-height: 2rem;
+}
+button, input[type=submit]{
+  background-color:#dce3fb;
+  border-radius: 3px;
+}
+button:hover,
+input[type=submit]:hover,
+button:active,
+input[type=submit]:active {
+  background-color: $pink;
 }
 input[type=text]:hover,
 textarea:focus,

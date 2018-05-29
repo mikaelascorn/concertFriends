@@ -82,7 +82,7 @@ class Homepage extends React.Component {
       if (user !== null) {
         firebase.database().ref(`users/${this.state.userId}`)
           // console.log(user);
-          // theres no data for the user to get, we need to allow them to get the access to the data when they login
+          // theres no data for the user to get, we need to allow them to get the access to the data when they log in
           .on('value', (snapshot) => {
             const data = snapshot.val();
             // console.log(data);
@@ -241,7 +241,7 @@ class Homepage extends React.Component {
             <div className="homepageWallpaper" >
               <div className="homepageWrapper">
                 <div className="signInInfo">
-                  <button className="logoutButton" onClick={this.logout}>Logout</button>
+                  <button className="logoutButton" onClick={this.logout}>Log out</button>
                   <img className="googlePhoto" src={this.state.displayPhoto} alt="A photo from your google" />
                 </div>
                 <h1>I <img src="../../assets/logo-final.svg" alt="I heart concerts logo" /> Concerts</h1>
