@@ -84,6 +84,7 @@ MEDIA QUERIES
     min-height: 80px;
   } 
 }
+<<<<<<< HEAD
 =======
 
 
@@ -93,3 +94,26 @@ MEDIA QUERIES
 MEDIA QUERIES
 ==========================*/
 >>>>>>> ee02609e3125f483d09c170c36dabb99d4d3cbf8
+=======
+
+@media(min-width: 1600px) {
+  .journalInfo  {
+      width: 25%;
+    }  
+
+    padding: 10px 20px;
+    .journalInputs {
+      float: left;
+      width: calc( 100% / 4 );
+      input#date,
+      input#artist {
+        min-height: 80px;
+      }
+    }  
+    .journalFloat {
+      padding: 20px 10px;
+
+    }
+}
+
+>>>>>>> bb2abfcfca13ec99fa995b71dfbf22161fcc7495
