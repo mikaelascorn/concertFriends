@@ -74,3 +74,24 @@ MEDIA QUERIES
     min-height: 80px;
   } 
 }
+
+@media(min-width: 1600px) {
+  .journalInfo  {
+      width: 25%;
+    }  
+
+    padding: 10px 20px;
+    .journalInputs {
+      float: left;
+      width: calc( 100% / 4 );
+      input#date,
+      input#artist {
+        min-height: 80px;
+      }
+    }  
+    .journalFloat {
+      padding: 20px 10px;
+
+    }
+}
+
