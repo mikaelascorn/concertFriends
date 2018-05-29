@@ -39,7 +39,7 @@
   margin: 15px;
   text-align: left;
   padding: 15px;
-
+  background-color: white;
   .showItem {
     text-decoration: none;
   }
@@ -52,7 +52,7 @@
 .searchBandItems {
   list-style: none;
   border: 2px solid $blue;
-  margin: 30px;
+  margin: 15px;
   padding: 10px;
   text-align: left;
   background-color: white;
@@ -92,8 +92,14 @@
   .journalList {
     max-width: 100%;
   }
+  .showItems {
+    float: left;
+    width: calc(( 100% / 2 ) - 30px );
+    min-height: 200px;
+  }
   .searchBandItems {
     float: left;
-    width: calc(( 100% / 2 ) - 60px );
+    width: calc(( 100% / 2 ) - 30px);
+
   }
 }

@@ -198,13 +198,13 @@ class Homepage extends React.Component {
 
     {
       allShowsClone[0].length === 0 ?
-      this.setState({
-        notOnTour: true
-      }) :
-      this.setState({
-        allShows: finalShows,
-        notOnTour: false
-      })
+        this.setState({
+          notOnTour: true
+        }) :
+        this.setState({
+          allShows: finalShows,
+          notOnTour: false
+        })
     }
   }
 
@@ -298,7 +298,7 @@ class Homepage extends React.Component {
                       <textarea name="memory" id="memory" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
                     </div>
                   </div>
-                    <input type="submit" value="Add Entry" />
+                  <input type="submit" value="Add Entry" />
                   <h2>Artists {this.state.displayName} has seen in concert!</h2>
                   <ul className="journalList clearfix">
                     {this.state.artistsSeen.map((journal) => {
