@@ -8,14 +8,14 @@ import Homepage from './Homepage';
 import WelcomePage from './WelcomePage';
 
 class App extends React.Component {
-  
+
   render() {
     return (
       <div>
         <div>
           <h1>I
-            <img src="/public/hand-blue.svg" alt="hand making the rock-on gesture"/>
-          Concerts</h1>
+            <img src="/public/hand-blue.svg" alt="hand making the rock-on gesture" />
+            Concerts</h1>
           <h2>One place to search for upcoming concerts by your favourite artists and keep a journal of memories from past concerts you've attended!</h2>
           {this.state.loggedIn === false && <button onClick={this.loginWithGoogle}>Login with Google</button>}
           {this.state.loggedIn === true ? <button onClick={this.logout}>Logout</button> : null}
@@ -25,14 +25,10 @@ class App extends React.Component {
         </div>
         <form onSubmit={this.handleSubmitUpcoming}>
           <input required type="text" name="artistName" value={this.state.artistName} onChange={this.handleChange} placeholder="Artist" />
-          {/* <select name="" id="">
-            <option value=""></option>
-            <option value=""></option>
-          </select> */}
           <input type="submit" value="Artist Search" />
           <div>
             <h3>{this.state.postedName}</h3>
-            <img src={this.state.imageArtist} alt=""/>
+            <img src={this.state.imageArtist} alt="" />
           </div>
           <h2>Upcoming Concerts</h2>
           <ul>
@@ -84,4 +80,3 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
-
