@@ -285,12 +285,12 @@ class Homepage extends React.Component {
 
                     <div className="journalInfo journalMemLoc">
                       <label htmlFor="memory">A memory from the Concert</label>
-                      <input name="memory" id="memory" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></input>
+                      <textarea name="memory" id="memory" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
                     </div>
                   </div>
                     <input type="submit" value="Add Entry" />
                   <h2>Artists {this.state.displayName} has seen in concert!</h2>
-                  <ul className="journalList">
+                  <ul className="journalList clearfix">
                     {this.state.artistsSeen.map((journal) => {
                       return <JournalItem
                         key={journal.key}

@@ -89,4 +89,11 @@
   .homepageWrapper {
     max-width: 70%;
   }
+  .journalList {
+    max-width: 100%;
+  }
+  .searchBandItems {
+    float: left;
+    width: calc(( 100% / 2 ) - 60px );
+  }
 }
