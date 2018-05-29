@@ -116,6 +116,8 @@ class Homepage extends React.Component {
 
   handleSubmitUpcoming(e) {
     e.preventDefault();
+    console.log('hi');
+    document.getElementById('image').classList.remove('hide');
     this.setState({
       allShows: [],
       artistName: ''
@@ -253,10 +255,10 @@ class Homepage extends React.Component {
                   <p>Search for shows from your favourite artist.</p>
                   <div className="artistInputs">
                     <input required type="text" name="artistName" value={this.state.artistName} onChange={this.handleChange} placeholder="Artist" />
-                    <input type="submit" value="Artist Search" />
+                    <input type="submit" value="Artist Search"/>
                   </div>
-                  <div className="artistNameImg" >
-                    <h3>{this.state.postedName}</h3>
+                  <div id="image" className="artistNameImg hide">
+                    <h3 className="postedName">{this.state.postedName}</h3>
                     <img src={this.state.imageArtist} alt="" />
                   </div>
                   {this.state.notOnTour === true &&
