@@ -62,7 +62,12 @@ MEDIA QUERIES
       width: calc(( 100% / 2 ));
     }   
   }
-  .journalMemLoc {
-    max-width: 65%;
-  } 
+}
+
+@media(min-width: 1024px) {
+  .journalMemLoc  {
+    float: left;
+    width: calc(( 100% / 2 ));
+    min-height: 300px;
+  }   
 }
