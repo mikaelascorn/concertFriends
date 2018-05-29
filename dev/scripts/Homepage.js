@@ -29,6 +29,7 @@ class Homepage extends React.Component {
       notOnTour: false,
       loggedIn: false,
       displayName: '',
+      displayPhoto: '',
       artistSeen: '',
       seenDate: '',
       seenLocation: '',
@@ -49,6 +50,7 @@ class Homepage extends React.Component {
       allShows: [],
       userId: '',
       displayName: '',
+      displayPhoto: '',
       loggedIn: false,
       artistsSeen: []
     });
@@ -58,10 +60,11 @@ class Homepage extends React.Component {
   componentWillMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        console.log(user);
         console.log('user logged in');
-        // console.log(user);
         this.setState({
           loggedIn: true,
+          displayPhoto: user.photoURL,
           displayName: user.displayName,
           userId: user.uid,
         })
@@ -73,7 +76,6 @@ class Homepage extends React.Component {
 
   // Checking if we already have the users information from firebase
   componentDidMount() {
-    // this.dbRef = firebase.database().ref(`users/`);
     // this method gets a user passed, if theres a user
     firebase.auth().onAuthStateChanged((user) => {
       // console.log(user);
@@ -88,7 +90,6 @@ class Homepage extends React.Component {
 
             for (let item in data) {
               data[item].key = item;
-
               journalArray.push(data[item])
               console.log(journalArray);
             }
@@ -228,7 +229,10 @@ class Homepage extends React.Component {
           {this.state.loggedIn === true &&
             <div className="homepageWallpaper" >
               <div className="homepageWrapper">
-                <button className="logoutButton" onClick={this.logout}>Logout</button> 
+                <div className="signInInfo">
+                  <button className="logoutButton" onClick={this.logout}>Logout</button> 
+                  <img className="googlePhoto" src={this.state.displayPhoto} alt="A photo from your google"/>
+                </div>
                 <h1>I Heart Concerts</h1>
                 <div>
                   <h2>Hi, {this.state.displayName}</h2>
