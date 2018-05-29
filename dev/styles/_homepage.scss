@@ -85,7 +85,6 @@
   }
 }
 
-
 @media(min-width: 1024px) {
   .homepageWrapper {
     max-width: 70%;
@@ -100,7 +99,7 @@
   }
   .searchBandItems {
     float: left;
-    width: calc(( 100% / 2 ) - 60px);
+    width: calc(( 100% / 2 ) - 30px);
 
   }
 }
