@@ -305,7 +305,7 @@ class Homepage extends React.Component {
                 <div className="welcomePage">
                   <h2>Thank you for visiting. See you on the dancefloor!</h2>
                   <img src="assets/logo1.jpg" alt="I Heart Concerts Logo" />
-                  <p>Made by <a href="#" target="_blank" >Clint Lee</a> <a href="https://www.mikaelamade.com" target="_blank" >Mikaela Scornaienchi</a> <a href="https://www.nataleecodes.com" target="_blank" >Natalee Blagden</a></p>
+                  <p>Made by <a href="http://www.clintdevs.live" target="_blank" >Clint Lee</a> <a href="https://www.mikaelamade.com" target="_blank" >Mikaela Scornaienchi</a> <a href="http://www.nataleecodes.com" target="_blank" >Natalee Blagden</a></p>
                 </div>
               </div>
             </div>
