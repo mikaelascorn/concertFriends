@@ -285,7 +285,7 @@ class Homepage extends React.Component {
 
                     <div className="journalInfo journalMemLoc">
                       <label htmlFor="memory">A memory from the Concert</label>
-                      <textarea name="memory" id="memory" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></textarea>
+                      <input name="memory" id="memory" name="seenMemory" value={this.state.seenMemory} onChange={this.handleChange}></input>
                     </div>
                   </div>
                     <input type="submit" value="Add Entry" />
