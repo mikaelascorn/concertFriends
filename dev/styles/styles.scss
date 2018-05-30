@@ -26,6 +26,7 @@ GLOBAL STYLES
   }
 }
 button:hover,
+.showTickets:hover,
 input[type=submit]:hover {
   background-color: $pink;
 }
@@ -37,6 +38,7 @@ h1 {
 button,
 input[type=text],
 input[type=submit],
+.showTickets,
 textarea {
   background-color: white;
   border: 2px solid $blue;
@@ -44,10 +46,12 @@ textarea {
   margin: 5px;
   font-size: 1.8rem;
   line-height: 2rem;
+  border-radius: 10px;
 }
 input[type=text]:hover,
 textarea:focus,
-textarea:active {
+textarea:active,
+textarea:hover {
   border: 2px solid $pink;
 }
 /*==========================
